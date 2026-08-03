@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/*
+  Design language — "Sunset"
+  --------------------------
+  Warm cream base with a sunset-orange accent ramp and a deep espresso ink.
+  Palette: #f26b3a #d94f2a #a43a2a #f3e2cf #2f2a26
+*/
+
+:root {
+  --background: #fdfaf5; /* airy warm white — light & open */
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --foreground: #2f2a26; /* espresso ink */
+  --muted: #8a7d6d;
+  --border: #efe6d8;
+
+  --accent: #f26b3a; /* sunset orange */
+  --accent-deep: #d94f2a; /* deep orange */
+  --accent-dark: #a43a2a; /* brick */
+  --peach: #f6cbb0;
+
+  /* complementary "pop" — teal against the orange for attention */
+  --pop: #12938a;
+  --pop-soft: #d8efeb;
+
+  /* soft, vivid-yet-gentle section panel tints */
+  --tint-peach: #fce3d2;
+  --tint-gold: #f9eccf;
+  --tint-rose: #f9ddd8;
+  --tint-coral: #fbd8cd;
+  --tint-mint: #ddefe9;
+
+  --dark: #2f2a26; /* dark section bg */
+  --dark-surface: #3a332d;
+  --dark-border: #4a4139;
+  --on-dark: #f3e2cf;
+  --on-dark-muted: #c9b7a1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-dark: var(--accent-dark);
+  --color-peach: var(--peach);
+
+  --color-pop: var(--pop);
+  --color-pop-soft: var(--pop-soft);
+
+  --color-tint-peach: var(--tint-peach);
+  --color-tint-gold: var(--tint-gold);
+  --color-tint-rose: var(--tint-rose);
+  --color-tint-coral: var(--tint-coral);
+  --color-tint-mint: var(--tint-mint);
+
+  --color-dark: var(--dark);
+  --color-dark-surface: var(--dark-surface);
+  --color-dark-border: var(--dark-border);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* clip (not hidden) prevents accidental horizontal scroll while
+     preserving position: sticky on the nav */
+  overflow-x: clip;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Chunky display headings */
+.display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+/* Subtle dotted grid overlay */
+.dot-grid {
+  background-image: radial-gradient(rgba(243, 226, 207, 0.14) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Thin custom scrollbar for the project list panel */
+.thin-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Auto-scrolling marquees (skills / frameworks) ---- */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+}
+.marquee-left {
+  animation: marquee-left 40s linear infinite;
+}
+.marquee-right {
+  animation: marquee-right 40s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.marquee-track:hover .marquee-left,
+.marquee-track:hover .marquee-right {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left,
+  .marquee-right {
+    animation: none;
+  }
+}
