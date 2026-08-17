@@ -1,4 +1,4 @@
-# Jassiel Nkosi — Developer Portfolio & CV
+# Nkosenhle Ndlovu — Developer Portfolio & CV
 
 A minimalist, project-based portfolio and CV, with a whimsical cartoon
 (Storyset "cuate") aesthetic. Built with Next.js, TypeScript, Tailwind CSS v4,
