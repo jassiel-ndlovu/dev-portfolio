@@ -54,7 +54,7 @@ export function SiteNav() {
       <nav className="mx-auto w-full max-w-6xl px-5">
         <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-2">
           {/* Left — socials (hidden on the smallest screens; also in footer) */}
-          <ul className="hidden items-center gap-0.5 justify-self-start sm:flex">
+          <ul className="col-start-1 hidden items-center gap-0.5 justify-self-start sm:flex">
             {activeSocials.map((s) => (
               <li key={s.label}>
                 <a
@@ -71,10 +71,10 @@ export function SiteNav() {
             ))}
           </ul>
 
-          {/* Centre — avatar + wordmark logo */}
+          {/* Centre — avatar + wordmark logo (always in the middle column) */}
           <Link
             href="/"
-            className="group flex min-w-0 items-center gap-2 justify-self-center sm:gap-2.5"
+            className="col-start-2 group flex min-w-0 items-center gap-2 justify-self-center sm:gap-2.5"
           >
             <img
               src={site.photo}
@@ -92,7 +92,7 @@ export function SiteNav() {
           {/* Right — nav links (desktop) */}
           <NavLinks
             pathname={pathname}
-            className="hidden items-center gap-1 justify-self-end lg:flex"
+            className="col-start-3 hidden items-center gap-1 justify-self-end lg:flex"
           />
         </div>
 

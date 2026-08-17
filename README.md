@@ -2,7 +2,7 @@
 
 A minimalist, project-based portfolio and CV, with a whimsical cartoon
 (Storyset "cuate") aesthetic. Built with Next.js, TypeScript, Tailwind CSS v4,
-and Framer Motion; deploys to Azure Static Web Apps.
+and Framer Motion; deploys to AWS Amplify Hosting.
 
 ## Highlights
 
@@ -54,18 +54,21 @@ Placeholder SVGs live in `public/illustrations/`. To use the real cartoons:
 
 The free Storyset license requires attribution — a link is already in the footer.
 
-## Deploying to Azure Static Web Apps
+## Deploying to AWS Amplify Hosting
+
+Amplify Hosting is the managed, Git-connected way to run a Next.js app (SSR)
+on AWS — the closest equivalent to Vercel/Netlify.
 
 1. Push this repo to GitHub.
-2. In the Azure Portal, create a **Static Web App** and connect it to the repo.
-   Choose **Next.js** as the build preset (app location `/`). Azure adds an API
-   token secret to your repo automatically.
-3. The included workflow (`.github/workflows/azure-static-web-apps.yml`) then
-   builds and deploys on every push to `main`.
-4. Add your GitHub token in **two** places:
-   - Repo secret `PORTFOLIO_GITHUB_TOKEN` (used at build/deploy).
-   - SWA **Configuration → Application settings** as `GITHUB_TOKEN` (used at runtime).
+2. In the AWS Console, open **AWS Amplify → Create new app → Host web app**,
+   authorize GitHub, and pick this repo and the `main` branch.
+3. Amplify auto-detects Next.js and uses the included `amplify.yml` build spec.
+4. Save and deploy. Every push to `main` redeploys automatically.
+
+No environment variables are required — the site is fully data-driven (the old
+GitHub proxy was removed). `staticwebapp.config.json` and the disabled Azure
+workflow are leftovers and can be deleted.
 
 ## Tech stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Azure Static Web Apps.
+Next.js (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · AWS Amplify.

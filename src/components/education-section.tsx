@@ -4,11 +4,17 @@ import { Reveal } from "./reveal";
 
 export function EducationSection() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-5 py-16">
-      <div className="mb-8">
-        <h2 className="display text-3xl sm:text-4xl">Education</h2>
-        <p className="mt-2 max-w-xl text-muted">
-          A steady climb from matric distinctions to postgraduate data science.
+    <section className="mx-auto w-full max-w-6xl px-5 py-20 sm:py-28">
+      <div className="mx-auto mb-12 max-w-2xl text-center">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent-deep">
+          Education
+        </p>
+        <h2 className="display text-4xl tracking-tight sm:text-5xl">
+          From matric to data science.
+        </h2>
+        <p className="mt-4 text-lg text-muted">
+          A steady climb from seven matric distinctions to postgraduate data
+          science.
         </p>
       </div>
 

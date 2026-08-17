@@ -128,7 +128,7 @@ export const experience: Experience[] = [
     logo: "/companies/enc-wits.png",
     period: "Jan 2023 – Dec 2023",
     detail:
-      "Designing graphics and creating content for the Engineering Student Council at the University of the Witwatersrand, enhancing communication and engagement with students.",
+      "Designing graphics and creating content for the Every Nation Church at the University of the Witwatersrand, enhancing communication and engagement with students.",
   }
 ];
 
@@ -177,6 +177,7 @@ export interface Certification {
   issuer: string;
   image: string; // path under /public/certifications
   credentialUrl?: string;
+  detail?: string;
 }
 
 export const certifications: Certification[] = [
@@ -186,6 +187,15 @@ export const certifications: Certification[] = [
     image:
       "/certifications/AliBaba Cloud Academy - Cloud Computing Certification.png",
     credentialUrl: "",
+    detail: "Foundational cloud computing certification.",
+  },
+  {
+    name: "Professional Member (Student)",
+    issuer: "IITPSA — Institute of IT Professionals South Africa",
+    image: "/certifications/IITPSA-Membership-Certificate.png",
+    credentialUrl: "/certifications/IITPSA-Membership-Certificate.pdf",
+    detail:
+      "Student membership of South Africa's SAQA-recognised IT professional body · valid to Jul 2027.",
   },
 ];
 
@@ -248,11 +258,47 @@ export const softSkills: SoftSkill[] = [
 
 export const achievements: string[] = [
   "Matriculated with 7 distinctions (NSC, 2021).",
+  "Academic Top 3 at Knockando residence, Wits (2022).",
+  "Four Certificates of Merit across CS and Mathematics (2022–2023).",
+  "University Entrance & Council Merit Scholarships (2022–2024).",
   "Reached Round 2 of the SATMO Olympiad in both 2023 and 2024.",
   "Progressed to the third round of the Wits Mathematics Competition (2023).",
-  "Alibaba Cloud Academy — Cloud Computing certification.",
-  "BSc Computer Science with a major in Mathematics (2025).",
-  "Pursuing BSc (Hons) in Computer Science, majoring in Data Science / Big Data Analytics.",
+  "Alibaba Cloud Academy — Cloud Computing certification; IITPSA student member.",
+];
+
+/* ------------------------------------------------------------------ */
+/* Awards & scholarships                                              */
+/* ------------------------------------------------------------------ */
+
+export interface Award {
+  title: string;
+  detail: string;
+}
+
+export const awards: Award[] = [
+  { title: "Academic Top 3 — Knockando Residence", detail: "Wits · 2022" },
+  {
+    title: "Certificate of Merit — Data Structures & Algorithms I",
+    detail: "Wits · 2022",
+  },
+  {
+    title: "Certificate of Merit — Information Systems IB",
+    detail: "Wits · 2022",
+  },
+  {
+    title: "Certificate of Merit — Database Fundamentals II",
+    detail: "Wits · 2023",
+  },
+  {
+    title: "Certificate of Merit — Multivariable Calculus",
+    detail: "Wits · 2023",
+  },
+];
+
+export const scholarships: Award[] = [
+  { title: "University Entrance Scholarship", detail: "Wits · 2022" },
+  { title: "University Council Merit Scholarship", detail: "Wits · 2023" },
+  { title: "University Council Merit Scholarship", detail: "Wits · 2024" },
 ];
 
 // Recreational activities — each with its own illustration.
@@ -366,5 +412,5 @@ export const cv = {
     "Web & Mobile": ["React / Next.js", "Android Studio", "Node.js"],
     "Data & Cloud": ["Data Science", "Big Data Analytics", "Azure", "Alibaba Cloud"],
   } as Record<string, string[]>,
-  resumePdf: "", // e.g. "/Nkosenhle-Ndlovu-CV.pdf"
+  resumePdf: "/Nkosenhle-Ndlovu-CV.pdf",
 };

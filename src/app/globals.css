@@ -8,12 +8,14 @@
 */
 
 :root {
-  --background: #fdfaf5; /* airy warm white — light & open */
+  /* Apple-inspired neutrals: cool near-whites, near-black ink, soft grey lines */
+  --background: #fbfbfd; /* Apple off-white */
   --surface: #ffffff;
   --surface-2: #ffffff;
-  --foreground: #2f2a26; /* espresso ink */
-  --muted: #8a7d6d;
-  --border: #efe6d8;
+  --foreground: #1d1d1f; /* Apple ink */
+  --muted: #6e6e73; /* Apple secondary grey */
+  --border: #d2d2d7; /* Apple hairline */
+  --alt: #f5f5f7; /* Apple alt-section grey */
 
   --accent: #f26b3a; /* sunset orange */
   --accent-deep: #d94f2a; /* deep orange */
@@ -36,6 +38,21 @@
   --dark-border: #4a4139;
   --on-dark: #f3e2cf;
   --on-dark-muted: #c9b7a1;
+
+  /* VS Code (Dark+) palette — scoped to the projects workbench */
+  --vsc-bg: #1e1e1e;
+  --vsc-panel: #252526;
+  --vsc-activity: #333333;
+  --vsc-titlebar: #323233;
+  --vsc-border: #3c3c3c;
+  --vsc-active: #37373d;
+  --vsc-text: #d4d4d4;
+  --vsc-sub: #858585;
+  --vsc-keyword: #569cd6;
+  --vsc-string: #ce9178;
+  --vsc-comment: #6a9955;
+  --vsc-func: #dcdcaa;
+  --vsc-type: #4ec9b0;
 }
 
 @theme inline {
@@ -45,6 +62,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-alt: var(--alt);
 
   --color-accent: var(--accent);
   --color-accent-deep: var(--accent-deep);
@@ -66,6 +84,20 @@
   --color-on-dark: var(--on-dark);
   --color-on-dark-muted: var(--on-dark-muted);
 
+  --color-vsc-bg: var(--vsc-bg);
+  --color-vsc-panel: var(--vsc-panel);
+  --color-vsc-activity: var(--vsc-activity);
+  --color-vsc-titlebar: var(--vsc-titlebar);
+  --color-vsc-border: var(--vsc-border);
+  --color-vsc-active: var(--vsc-active);
+  --color-vsc-text: var(--vsc-text);
+  --color-vsc-sub: var(--vsc-sub);
+  --color-vsc-keyword: var(--vsc-keyword);
+  --color-vsc-string: var(--vsc-string);
+  --color-vsc-comment: var(--vsc-comment);
+  --color-vsc-func: var(--vsc-func);
+  --color-vsc-type: var(--vsc-type);
+
   --font-sans: var(--font-space-grotesk);
   --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
@@ -81,17 +113,28 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Apple-inspired: crisp system text for body copy, roomy line-height */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+    Helvetica, Arial, var(--font-sans), sans-serif;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
-/* Chunky display headings */
+/* Chunky display headings — kept for brand character, Apple-tight tracking */
 .display {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   line-height: 0.95;
+}
+
+/* Monospace surfaces (VS Code workbench) */
+.mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 /* Subtle dotted grid overlay */
@@ -109,6 +152,22 @@ body {
   border-radius: 999px;
 }
 .thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* VS Code–style scrollbar for the workbench */
+.vsc-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.vsc-scroll::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 0;
+}
+.vsc-scroll::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+.vsc-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 

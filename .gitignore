@@ -45,3 +45,10 @@ next-env.d.ts
 _inspiration/
 
 public/illustrations/_originals/
+
+# local render previews / artifacts
+public/_cvpreview*.png
+public/certifications/*-1.png
+cv-latex/*.aux
+cv-latex/*.log
+cv-latex/*.out

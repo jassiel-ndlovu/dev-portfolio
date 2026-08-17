@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center px-5 py-20 text-center">
       <div className="h-64 w-64">
-        <Illustration name="401-Error-Unauthorized.svg" alt="Page not found" />
+        <Illustration name="404-Error.svg" alt="Page not found" />
       </div>
       <h1 className="display mt-6 text-4xl sm:text-5xl">Lost in the sunset</h1>
       <p className="mt-3 max-w-md text-muted">

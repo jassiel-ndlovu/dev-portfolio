@@ -19,8 +19,8 @@ export function SiteFooter() {
             </span>
             <span>· deployed on</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 font-medium text-foreground">
-              <i className="fa-brands fa-microsoft text-sm text-accent-deep" aria-hidden="true" />
-              Azure Static Web Apps
+              <i className="fa-brands fa-aws text-sm text-accent-deep" aria-hidden="true" />
+              AWS Amplify
             </span>
           </div>
         </div>
