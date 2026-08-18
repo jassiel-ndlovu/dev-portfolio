@@ -1,20 +1,23 @@
 version: 1
-applications:
-  - appRoot: src/app
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm ci
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        # Next.js (SSR/hybrid) build output.
-        baseDirectory: .next
-        files:
-          - "**/*"
-      cache:
-        paths:
-          - node_modules/**/*
-          - .next/cache/**/*
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Next.js 16 needs Node 20+. Use it explicitly so Amplify's default
+        # image version can't cause resolution drift.
+        - nvm use 20 || nvm install 20
+        # `npm install` (not `npm ci`) tolerates lockfile drift between your
+        # local npm and Amplify's, which is what was breaking the build.
+        - npm install --no-audit --no-fund
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    # Next.js build output.
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
