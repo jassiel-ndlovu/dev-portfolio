@@ -54,20 +54,22 @@ Placeholder SVGs live in `public/illustrations/`. To use the real cartoons:
 
 The free Storyset license requires attribution — a link is already in the footer.
 
-## Deploying to AWS Amplify Hosting
+## Deploying to AWS Amplify Hosting (static export)
 
-Amplify Hosting is the managed, Git-connected way to run a Next.js app (SSR)
-on AWS — the closest equivalent to Vercel/Netlify.
+The site is a **static export** (`output: "export"` in `next.config.ts`) — no
+server or runtime. `next build` emits a plain `out/` folder that Amplify hosts
+as static files.
 
 1. Push this repo to GitHub.
 2. In the AWS Console, open **AWS Amplify → Create new app → Host web app**,
    authorize GitHub, and pick this repo and the `main` branch.
-3. Amplify auto-detects Next.js and uses the included `amplify.yml` build spec.
+3. **Leave "monorepo" unchecked** and the app-root directory blank — the app is
+   at the repo root. The included `amplify.yml` builds with Node 20 and serves
+   `baseDirectory: out`.
 4. Save and deploy. Every push to `main` redeploys automatically.
 
-No environment variables are required — the site is fully data-driven (the old
-GitHub proxy was removed). `staticwebapp.config.json` and the disabled Azure
-workflow are leftovers and can be deleted.
+No environment variables are required. `staticwebapp.config.json` and the
+disabled Azure workflow are leftovers and can be deleted.
 
 ## Tech stack
 

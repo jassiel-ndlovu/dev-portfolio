@@ -5,16 +5,15 @@ frontend:
       commands:
         # Next.js 16 needs Node 20+.
         - nvm use 20 || nvm install 20
-        # `npm install` (not `npm ci`) tolerates lockfile drift between your
-        # local npm and Amplify's.
+        # `npm install` (not `npm ci`) tolerates lockfile drift.
         - npm install --no-audit --no-fund
     build:
       commands:
+        # Static export → produces a plain `out/` folder.
         - npm run build
   artifacts:
-    # `.next` is emitted at the repo root — so the app root must be the repo
-    # root (do NOT set a monorepo appRoot of src/app).
-    baseDirectory: .next
+    # Static export output. (Not a monorepo — app root is the repo root.)
+    baseDirectory: out
     files:
       - "**/*"
   cache:
