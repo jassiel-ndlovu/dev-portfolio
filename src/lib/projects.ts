@@ -139,7 +139,7 @@ export const projects: Project[] = [
     links: [
       {
         label: "Paper (PDF)",
-        url: "https://github.com/jassiel-ndlovu/Probabilistic-Matrix-Factorization/blob/main/report/main.pdf",
+        url: "https://github.com/jassiel-ndlovu/Probabilistic-Matrix-Factorization/blob/master/report/main.pdf",
         icon: "fa-solid fa-file-pdf",
       },
     ],
