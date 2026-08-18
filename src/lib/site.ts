@@ -112,7 +112,7 @@ export const experience: Experience[] = [
     logo: "/companies/triangle-labs.jpeg",
     period: "Aug 2023 – Dec 2023",
     detail:
-      "Creating educational content for high-school and university students, including problem sets, tutorials, and explanatory videos.",
+      "Creating educational content for high-school and primary-level students, including problem sets, tutorials, and explanatory videos.",
   },
   {
     role: "Computer Science & Applied Mathematics Tutor",
