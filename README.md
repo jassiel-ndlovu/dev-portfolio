@@ -68,6 +68,14 @@ as static files.
    `baseDirectory: out`.
 4. Save and deploy. Every push to `main` redeploys automatically.
 
+If the app was first created as a Next.js **SSR** app, it will look for a
+server manifest JSON that a static export doesn't produce. Flip it to static
+hosting once:
+
+```bash
+aws amplify update-app --app-id <YOUR_APP_ID> --platform WEB
+```
+
 No environment variables are required. `staticwebapp.config.json` and the
 disabled Azure workflow are leftovers and can be deleted.
 
