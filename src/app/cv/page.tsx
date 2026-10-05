@@ -11,6 +11,7 @@ import {
   scholarships,
 } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
+import { Figure, Shape } from "@/components/figure";
 
 export const metadata: Metadata = {
   title: `CV | ${site.name}`,
@@ -19,9 +20,13 @@ export const metadata: Metadata = {
 
 export default function CVPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-5 py-24 sm:py-32">
+    <div className="mx-auto w-full max-w-3xl px-5 py-14 sm:py-16">
       <Reveal>
-        <header className="pb-10">
+        <header className="relative pb-10 sm:pr-40">
+          <div className="absolute right-0 top-0 hidden sm:block" aria-hidden="true">
+            <Shape kind="circle" color="#ffc845" className="absolute bottom-0 left-1/2 h-32 w-32 -translate-x-1/2" />
+            <Figure name="transhumans/perserverance-dedication-focus" fill="#ffffff" className="relative h-44" />
+          </div>
           <p className="label mb-4">Curriculum vitae</p>
           <h1 className="display text-5xl sm:text-6xl">
             {site.name}
@@ -38,7 +43,7 @@ export default function CVPage() {
                 <a
                   key={s.label}
                   href={s.href}
-                  className="flex items-center gap-1.5 transition-colors hover:text-accent"
+                  className="flex items-center gap-1.5 transition-colors hover:text-ink"
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
                 >
@@ -50,7 +55,7 @@ export default function CVPage() {
           {cv.resumePdf && (
             <a
               href={cv.resumePdf}
-              className="mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent-hover"
+              className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-black"
             >
               Download PDF
             </a>
@@ -120,7 +125,7 @@ export default function CVPage() {
                   {items.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full bg-alt px-3 py-1 text-xs text-muted"
+                      className="rounded-full border-2 border-ink bg-surface px-3 py-0.5 text-xs font-medium"
                     >
                       {s}
                     </span>
@@ -169,9 +174,11 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-border py-14">
-      <h2 className="display mb-8 text-2xl">{title}</h2>
-      <div className="space-y-8">{children}</div>
+    <section className="border-t-2 border-ink py-10">
+      <h2 className="display mb-6 text-2xl">
+        <span className="marker">{title}</span>
+      </h2>
+      <div className="space-y-6">{children}</div>
     </section>
   );
 }

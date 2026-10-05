@@ -335,7 +335,7 @@ export const recreation: Recreation[] = [
   },
   {
     name: "Music",
-    illustration: "music.svg",
+    illustration: "transhumans/entertainment-music-walk.png",
     blurb: "Listening widely, with a soft spot for jazz.",
   },
 ];
@@ -344,7 +344,7 @@ export const recreation: Recreation[] = [
 /* Values: "how I work"                                              */
 /* ------------------------------------------------------------------ */
 
-export type Tint = "blue" | "sky" | "green" | "slate";
+export type Tint = "yellow" | "coral" | "pink" | "green";
 
 export interface Value {
   title: string;
@@ -366,29 +366,29 @@ export const values: Value[] = [
     blurb:
       "Clear structure and documentation, so the next person (often future me) can follow the reasoning.",
     illustration: "agile-workflow.svg",
-    tint: "sky",
+    tint: "coral",
   },
   {
     title: "Teach as you build",
     blurb:
       "Four years of tutoring taught me that if I can't explain it simply, I don't understand it yet.",
     illustration: "teamwork.svg",
-    tint: "blue",
+    tint: "yellow",
   },
   {
     title: "Lead with initiative",
     blurb:
       "Spotting what needs doing and taking ownership of it end to end.",
     illustration: "leadership-minded.svg",
-    tint: "slate",
+    tint: "pink",
   },
 ];
 
 export const tintClasses: Record<Tint, string> = {
-  blue: "bg-tint-blue",
-  sky: "bg-tint-sky",
-  green: "bg-tint-green",
-  slate: "bg-tint-slate",
+  yellow: "bg-yellow",
+  coral: "bg-coral",
+  pink: "bg-pink",
+  green: "bg-green-soft",
 };
 
 /* ------------------------------------------------------------------ */

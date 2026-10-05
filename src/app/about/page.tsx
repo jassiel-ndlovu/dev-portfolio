@@ -13,7 +13,9 @@ import { TechMarquee } from "@/components/tech-marquee";
 import { ValuesStrip } from "@/components/values-strip";
 import { SectionHeading } from "@/components/section-heading";
 import { Avatar } from "@/components/avatar";
-import { FlowSection } from "@/components/flow-section";
+import { Band } from "@/components/band";
+import { PageIntro } from "@/components/page-intro";
+import { Figure, Shape } from "@/components/figure";
 
 export const metadata: Metadata = {
   title: `About | ${site.name}`,
@@ -27,94 +29,94 @@ const rowB = techStack.slice(half);
 export default function AboutPage() {
   return (
     <div>
-      {/* Intro */}
-      <FlowSection tone="blue">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-24 sm:py-32 md:grid-cols-[1.2fr_1fr]">
-          <Reveal>
-            <Avatar
-              src={site.photo}
-              alt={site.name}
-              className="mb-8 h-16 w-16 rounded-full object-cover ring-4 ring-white"
-            />
-            <h1 className="display text-5xl sm:text-6xl md:text-7xl">About me</h1>
-            <p className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
-              I&apos;m {site.name}, a Computer Science graduate who likes
-              understanding systems from the ground up and explaining them
-              simply. Four years of tutoring Mathematics and IT taught me that
-              good engineering and good teaching share a goal: making complex
-              things clear.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Illustration
-              name="creative-thinker.svg"
-              alt=""
-              className="mx-auto h-72 w-72 md:h-96 md:w-96"
-            />
-          </Reveal>
-        </div>
-      </FlowSection>
+      <PageIntro
+        title="About me"
+        figure="transhumans/chill-sitting"
+        fill="#ffc845"
+        shape="#ffb8c6"
+        lead={
+          <Avatar
+            src={site.photo}
+            alt={site.name}
+            className="mb-6 h-16 w-16 rounded-full border-2 border-ink object-cover"
+          />
+        }
+      >
+        I&apos;m {site.name}, a Computer Science graduate who likes
+        understanding systems from the ground up and explaining them simply.
+        Four years of tutoring Mathematics and IT taught me that good
+        engineering and good teaching share a goal: making complex things
+        clear.
+      </PageIntro>
 
       {/* Tech stack marquees */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-28 sm:py-36">
-        <SectionHeading
-          title="Skills and frameworks"
-          subtitle="Languages, frameworks and tools I use. Hover to pause."
-          className="mb-14"
-        />
-        <div className="space-y-3">
+      <Band tone="ink">
+        <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:py-20">
+          <SectionHeading
+            title="Skills and frameworks"
+            subtitle="Languages, frameworks and tools I use. Hover to pause."
+            className="mb-10"
+          />
+        </div>
+        <div className="-mt-6 space-y-3 pb-16 sm:pb-20">
           <TechMarquee items={rowA} direction="left" />
           <TechMarquee items={rowB} direction="right" />
         </div>
-      </section>
+      </Band>
 
-      {/* Values */}
       <ValuesStrip />
 
       {/* Soft skills */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-28 sm:py-36">
-        <SectionHeading
-          title="Soft skills"
-          subtitle="Built through tutoring and teamwork."
-          className="mb-16"
-        />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {softSkills.map((s, i) => (
-            <Reveal key={s.name} delay={(i % 4) * 0.06}>
-              <div className="h-full rounded-3xl bg-alt p-7">
-                <span className="mb-5 grid h-11 w-11 place-items-center rounded-2xl bg-white text-accent">
-                  <LucideIcon name={s.lucide} size={22} />
-                </span>
-                <h3 className="font-semibold tracking-tight">{s.name}</h3>
-                <p className="mt-1 text-sm text-muted">{s.blurb}</p>
-              </div>
-            </Reveal>
-          ))}
+      <Band tone="paper">
+        <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:py-20">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <SectionHeading
+              title="Soft skills"
+              subtitle="Built through tutoring and teamwork."
+              align="left"
+            />
+            <div className="relative hidden shrink-0 sm:block">
+              <Shape kind="arch" color="#ff7a59" className="absolute bottom-0 left-1/2 h-24 w-24 -translate-x-1/2" />
+              <Figure name="peeps/standing-18" fill="#ffffff" className="relative h-40" />
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {softSkills.map((s, i) => (
+              <Reveal key={s.name} delay={(i % 4) * 0.05}>
+                <div className="h-full rounded-2xl border-2 border-ink bg-surface p-5">
+                  <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-yellow text-ink">
+                    <LucideIcon name={s.lucide} size={20} />
+                  </span>
+                  <h3 className="font-semibold">{s.name}</h3>
+                  <p className="mt-1 text-sm text-muted">{s.blurb}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </section>
+      </Band>
 
       {/* Achievements */}
-      <FlowSection tone="green">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-5 py-28 sm:py-36 md:grid-cols-[1fr_1.2fr]">
+      <Band tone="yellow" decor>
+        <div className="mx-auto grid w-full max-w-5xl items-center gap-10 px-5 py-16 sm:py-20 md:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
-            <Illustration
-              name="success-factors.svg"
-              alt=""
-              className="mx-auto h-72 w-72 md:h-80 md:w-80"
-            />
+            <div className="relative mx-auto grid h-64 w-64 place-items-center md:h-72 md:w-72">
+              <Shape kind="circle" color="#ffffff" className="absolute inset-0" />
+              <Illustration name="success-factors.svg" alt="" className="relative h-[85%] w-[85%]" />
+            </div>
           </Reveal>
           <div>
             <SectionHeading
               title="Achievements"
               subtitle="Academic results, awards and certifications."
               align="left"
-              className="mb-8"
+              className="mb-6"
             />
-            <Reveal delay={0.1}>
-              <ul className="divide-y divide-black/[0.06] rounded-3xl border border-white bg-white/75 px-6 backdrop-blur">
+            <Reveal delay={0.08}>
+              <ul className="divide-y divide-ink/10 rounded-2xl border-2 border-ink bg-surface px-5">
                 {achievements.map((a) => (
-                  <li key={a} className="flex items-start gap-3 py-4">
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-tint-green text-green">
+                  <li key={a} className="flex items-start gap-3 py-3.5">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-ink text-yellow">
                       <i className="fa-solid fa-check text-[10px]" aria-hidden="true" />
                     </span>
                     <span className="text-[15px]">{a}</span>
@@ -124,27 +126,29 @@ export default function AboutPage() {
             </Reveal>
           </div>
         </div>
-      </FlowSection>
+      </Band>
 
       {/* Recreation */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-28 sm:py-36">
-        <SectionHeading
-          title="Outside of code"
-          subtitle="Games, art, writing and music."
-          className="mb-16"
-        />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {recreation.map((r, i) => (
-            <Reveal key={r.name} delay={(i % 3) * 0.07}>
-              <div className="card-lift flex h-full flex-col items-center rounded-[28px] bg-alt p-8 text-center">
-                <Illustration name={r.illustration} alt="" className="h-40 w-40" />
-                <h3 className="display mt-4 text-xl">{r.name}</h3>
-                <p className="mt-1 text-sm text-muted">{r.blurb}</p>
-              </div>
-            </Reveal>
-          ))}
+      <Band tone="paper">
+        <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:py-20">
+          <SectionHeading
+            title="Outside of code"
+            subtitle="Games, art, writing and music."
+            className="mb-10"
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {recreation.map((r, i) => (
+              <Reveal key={r.name} delay={(i % 3) * 0.06}>
+                <div className="card-lift flex h-full flex-col items-center rounded-2xl border-2 border-ink bg-surface p-6 text-center">
+                  <Illustration name={r.illustration} alt="" className="h-36 w-36" />
+                  <h3 className="display mt-3 text-xl">{r.name}</h3>
+                  <p className="mt-1 text-sm text-muted">{r.blurb}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </section>
+      </Band>
     </div>
   );
 }

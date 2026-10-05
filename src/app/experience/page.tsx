@@ -2,10 +2,11 @@
 import type { Metadata } from "next";
 import { site, experience, experienceSummary, olympiads } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
-import { Illustration } from "@/components/illustration";
 import { LucideIcon } from "@/components/lucide-icon";
 import { SectionHeading } from "@/components/section-heading";
-import { FlowSection } from "@/components/flow-section";
+import { Band } from "@/components/band";
+import { PageIntro } from "@/components/page-intro";
+import { Figure } from "@/components/figure";
 
 export const metadata: Metadata = {
   title: `Experience | ${site.name}`,
@@ -15,85 +16,86 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <div>
-      {/* Header */}
-      <FlowSection tone="blue">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-24 sm:py-32 md:grid-cols-[1.2fr_1fr]">
-          <Reveal>
-            <h1 className="display text-5xl sm:text-6xl md:text-7xl">Experience</h1>
-            <p className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
-              {experienceSummary}
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Illustration
-              name="mathematics-tutor.svg"
-              alt=""
-              className="mx-auto h-72 w-72 md:h-96 md:w-96"
-            />
-          </Reveal>
-        </div>
-      </FlowSection>
+      <PageIntro
+        title="Experience"
+        figure="transhumans/team-cooperation"
+        fill="#ffffff"
+        shape="#ffc845"
+      >
+        {experienceSummary}
+      </PageIntro>
 
       {/* Roles */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-28 sm:py-36">
-        <SectionHeading
-          title="Roles"
-          subtitle="Tutoring, teaching content and design work."
-          className="mb-16"
-        />
-        <div className="grid gap-5 md:grid-cols-2">
-          {experience.map((e, i) => (
-            <Reveal key={e.company} delay={(i % 2) * 0.08}>
-              <div className="flex h-full flex-col rounded-[28px] bg-alt p-8 sm:p-9">
-                <div className="flex items-center gap-4">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white">
-                    <img
-                      src={e.logo}
-                      alt={`${e.company} logo`}
-                      className="h-full w-full object-contain p-1.5"
-                    />
+      <Band tone="white">
+        <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:py-20">
+          <SectionHeading
+            title="Roles"
+            subtitle="Tutoring, teaching content and design work."
+            className="mb-10"
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            {experience.map((e, i) => (
+              <Reveal key={e.company} delay={(i % 2) * 0.06}>
+                <div className="flex h-full flex-col rounded-2xl border-2 border-ink bg-background p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl border-2 border-ink bg-white">
+                      <img
+                        src={e.logo}
+                        alt={`${e.company} logo`}
+                        className="h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="display text-xl leading-snug">{e.company}</h3>
+                      <div className="text-sm font-semibold">{e.role}</div>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="display text-xl leading-snug">{e.company}</h3>
-                    <div className="text-sm font-medium text-accent">{e.role}</div>
-                  </div>
+                  <span className="mt-5 self-start rounded-full bg-yellow px-2.5 py-1 text-xs font-semibold">
+                    {e.period}
+                  </span>
+                  <p className="mt-3 text-[15px] text-muted">{e.detail}</p>
                 </div>
-                <div className="label mt-6">{e.period}</div>
-                <p className="mt-2 text-[15px] text-muted">{e.detail}</p>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </section>
+      </Band>
 
       {/* Olympiads */}
-      <FlowSection tone="sky" flip>
-        <div className="mx-auto w-full max-w-6xl px-5 py-28 sm:py-36">
-          <SectionHeading
-            title="Olympiads and competitions"
-            subtitle="Mathematics and computing contests since school."
-            className="mb-16"
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
+      <Band tone="ink" decor>
+        <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:py-20">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <SectionHeading
+              title="Olympiads and competitions"
+              subtitle="Mathematics and computing contests since school."
+              align="left"
+            />
+            <Figure
+              name="transhumans/looking-sitting-introspective"
+              fill="#ffb8c6"
+              className="hidden h-32 sm:block"
+            />
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
             {olympiads.map((o, i) => (
-              <Reveal key={o.name} delay={(i % 2) * 0.08}>
-                <div className="flex h-full items-start gap-4 rounded-3xl border border-white bg-white/75 p-7 backdrop-blur">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-tint-sky text-sky">
+              <Reveal key={o.name} delay={(i % 2) * 0.06}>
+                <div className="flex h-full items-start gap-4 rounded-2xl bg-ink-2 p-5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-yellow text-ink">
                     <LucideIcon name="Sigma" size={20} />
                   </span>
                   <div>
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="font-semibold tracking-tight">{o.name}</h3>
-                      <span className="text-xs text-subtle">{o.years}</span>
+                      <h3 className="font-semibold text-white">{o.name}</h3>
+                      <span className="text-xs text-yellow">{o.years}</span>
                     </div>
-                    <p className="mt-1 text-sm text-muted">{o.result}</p>
+                    <p className="mt-1 text-sm text-white/70">{o.result}</p>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
-      </FlowSection>
+      </Band>
     </div>
   );
 }

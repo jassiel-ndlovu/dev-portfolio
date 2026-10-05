@@ -2,7 +2,7 @@ import { Reveal } from "./reveal";
 
 /**
  * Section header: a direct serif title with a short, plain subtitle.
- * Centered by default.
+ * Inherits text colour from its band.
  */
 export function SectionHeading({
   title,
@@ -28,13 +28,13 @@ export function SectionHeading({
         className={`display ${
           as === "h1"
             ? "text-5xl sm:text-6xl md:text-7xl"
-            : "text-4xl sm:text-5xl md:text-[3.5rem]"
+            : "text-4xl sm:text-5xl"
         }`}
       >
         {title}
       </Tag>
       {subtitle && (
-        <p className="mt-4 text-lg text-muted sm:text-xl">{subtitle}</p>
+        <p className="mt-3 text-lg opacity-75 sm:text-xl">{subtitle}</p>
       )}
     </Reveal>
   );

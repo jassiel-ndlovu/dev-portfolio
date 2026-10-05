@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 import { fileMeta, fileName, vscStatus } from "@/lib/vscode";
 import { EditorHeader } from "@/components/editor-parts";
 import { Reveal } from "@/components/reveal";
+import { Figure, Shape } from "@/components/figure";
 
 export const metadata: Metadata = {
   title: `Projects | ${site.name}`,
@@ -23,19 +24,27 @@ export default function ProjectsIndex() {
       <EditorHeader
         tab="Welcome"
         icon="fa-solid fa-code"
-        iconColor="#4daafc"
+        iconColor="#ffc845"
         crumbs={[{ label: "portfolio" }, { label: "projects" }]}
       />
 
       <div className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-10 sm:py-16">
         <Reveal>
-          <h1 className="display text-4xl text-white sm:text-5xl md:text-6xl">
-            Projects
-          </h1>
-          <p className="mt-3 max-w-xl text-lg text-vsc-sub">
-            {projects.length} projects across compilers, research, platforms
-            and apps. Open a file from the explorer, or start below.
-          </p>
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h1 className="display text-4xl text-white sm:text-5xl md:text-6xl">
+                Projects
+              </h1>
+              <p className="mt-3 max-w-xl text-lg text-vsc-sub">
+                {projects.length} projects across compilers, research, platforms
+                and apps. Open a file from the explorer, or start below.
+              </p>
+            </div>
+            <div className="relative hidden shrink-0 sm:block">
+              <Shape kind="circle" color="#ffc845" className="absolute bottom-0 left-1/2 h-28 w-28 -translate-x-1/2" />
+              <Figure name="peeps/sitting-2" fill="#ffffff" className="relative h-36" />
+            </div>
+          </div>
         </Reveal>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-2">
@@ -57,7 +66,7 @@ export default function ProjectsIndex() {
                         aria-hidden="true"
                       />
                       <span className="min-w-0">
-                        <span className="block text-[14px] text-[#4daafc] group-hover:underline">
+                        <span className="block text-[14px] text-yellow group-hover:underline">
                           {p.title}
                         </span>
                         <span className="block text-[13px] text-vsc-sub">
@@ -84,7 +93,7 @@ export default function ProjectsIndex() {
                       className="flex items-center gap-3 rounded-md px-2 py-1.5 transition-colors hover:bg-white/[0.04]"
                     >
                       <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${s.dot}`} title={s.label} />
-                      <span className="min-w-0 flex-1 truncate text-[#4daafc]">
+                      <span className="min-w-0 flex-1 truncate text-yellow">
                         {fileName(p.slug, p.language)}
                       </span>
                       <span className="shrink-0 text-vsc-dim">{p.year}</span>

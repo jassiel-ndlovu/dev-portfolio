@@ -12,7 +12,6 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/experience", label: "Experience" },
   { href: "/certifications", label: "Certifications" },
-  { href: "/cv", label: "CV" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -22,63 +21,59 @@ function isActive(pathname: string, href: string) {
 export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  // The projects workbench is the one dark page; the bar follows it.
-  const dark = pathname.startsWith("/projects");
+  const cvActive = isActive(pathname, "/cv");
 
   return (
-    <header
-      className={`sticky top-0 z-50 backdrop-blur-xl backdrop-saturate-150 ${
-        dark
-          ? "border-b border-white/10 bg-[#181818]/85 text-white"
-          : "border-b border-black/[0.06] bg-white/80 text-foreground"
-      }`}
-    >
-      <nav className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between px-5">
+    <header className="sticky top-0 z-50 bg-ink text-white">
+      <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-4 px-5">
         {/* Wordmark */}
         <Link href="/" className="group flex min-w-0 items-center gap-2.5">
           <img
             src={site.photo}
             alt=""
-            className="h-7 w-7 shrink-0 rounded-full object-cover"
+            className="h-8 w-8 shrink-0 rounded-full bg-yellow object-cover ring-2 ring-yellow"
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
           />
-          <span className="truncate text-[15px] font-semibold tracking-tight">
-            {site.name}
-          </span>
+          <span className="display truncate text-lg">{site.name}</span>
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
-          {links.map((l) => {
-            const active = isActive(pathname, l.href);
-            return (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`rounded-full px-3 py-1.5 text-[13px] transition-colors ${
-                    active
-                      ? dark
-                        ? "text-white"
-                        : "text-foreground"
-                      : dark
-                        ? "text-white/60 hover:text-white"
-                        : "text-subtle hover:text-foreground"
-                  }`}
-                >
-                  {l.label}
-                  <span
-                    className={`mx-auto mt-0.5 block h-px transition-all ${
-                      active ? "w-full bg-accent" : "w-0"
+        <div className="hidden items-center gap-1 md:flex">
+          <ul className="flex items-center gap-1">
+            {links.map((l) => {
+              const active = isActive(pathname, l.href);
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${
+                      active ? "text-white" : "text-white/60 hover:text-white"
                     }`}
-                  />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    {l.label}
+                    {active && (
+                      <span className="absolute inset-x-3 -bottom-0.5 h-[3px] rounded-full bg-yellow" />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <Link
+            href="/cv"
+            aria-current={cvActive ? "page" : undefined}
+            className={`ml-2 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+              cvActive
+                ? "bg-white text-ink"
+                : "bg-yellow text-ink hover:bg-yellow-deep"
+            }`}
+          >
+            CV
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
         <button
@@ -87,17 +82,17 @@ export function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="grid h-9 w-9 place-items-center rounded-full md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-full bg-white/10 md:hidden"
         >
           <span className="relative block h-3 w-4">
             <span
-              className={`absolute left-0 h-px w-4 bg-current transition-all duration-300 ${
-                open ? "top-1.5 rotate-45" : "top-0.5"
+              className={`absolute left-0 h-0.5 w-4 rounded bg-current transition-all duration-300 ${
+                open ? "top-1.5 rotate-45" : "top-0"
               }`}
             />
             <span
-              className={`absolute left-0 h-px w-4 bg-current transition-all duration-300 ${
-                open ? "top-1.5 -rotate-45" : "top-2.5"
+              className={`absolute left-0 h-0.5 w-4 rounded bg-current transition-all duration-300 ${
+                open ? "top-1.5 -rotate-45" : "top-3"
               }`}
             />
           </span>
@@ -112,7 +107,7 @@ export function SiteNav() {
         }`}
       >
         <ul className="min-h-0 px-5">
-          {links.map((l) => {
+          {[...links, { href: "/cv", label: "CV" }].map((l) => {
             const active = isActive(pathname, l.href);
             return (
               <li key={l.href}>
@@ -120,13 +115,13 @@ export function SiteNav() {
                   href={l.href}
                   tabIndex={open ? undefined : -1}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between border-b py-3.5 text-lg font-medium ${
-                    dark ? "border-white/10" : "border-black/[0.06]"
-                  } ${active ? "text-accent" : ""}`}
+                  className={`flex items-center justify-between border-b border-white/10 py-3.5 text-lg ${
+                    active ? "text-yellow" : "text-white"
+                  }`}
                 >
-                  {l.label}
+                  <span className="display">{l.label}</span>
                   <span aria-hidden="true" className="text-sm opacity-40">
-                    ›
+                    →
                   </span>
                 </Link>
               </li>

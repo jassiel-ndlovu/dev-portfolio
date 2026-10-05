@@ -69,7 +69,7 @@ export function ProjectSidebar() {
             onKeyDown={(e) => e.key === "Escape" && setQuery("")}
             placeholder="Search projects or tech"
             aria-label="Search projects"
-            className="w-full rounded-[3px] border border-vsc-border bg-[#313131] py-1.5 pl-7 pr-7 text-[13px] text-vsc-text outline-none placeholder:text-vsc-sub focus:border-[#0071e3]"
+            className="w-full rounded-[3px] border border-vsc-border bg-[#313131] py-1.5 pl-7 pr-7 text-[13px] text-vsc-text outline-none placeholder:text-vsc-sub focus:border-yellow"
           />
           {query && (
             <button
@@ -95,7 +95,7 @@ export function ProjectSidebar() {
                 aria-pressed={active}
                 className={`mono rounded-[3px] px-1.5 py-0.5 text-[11px] transition-colors ${
                   active
-                    ? "bg-[#0071e3] text-white"
+                    ? "bg-yellow text-ink"
                     : "bg-white/[0.06] text-vsc-sub hover:bg-white/10 hover:text-vsc-text"
                 }`}
               >
@@ -135,7 +135,7 @@ export function ProjectSidebar() {
               <button
                 type="button"
                 onClick={() => setQuery("")}
-                className="text-[#4daafc] hover:underline"
+                className="text-yellow hover:underline"
               >
                 Clear search
               </button>
@@ -153,7 +153,7 @@ export function ProjectSidebar() {
                 aria-current={active ? "page" : undefined}
                 className={`group flex min-w-[200px] shrink-0 items-center gap-2 rounded-[3px] border px-2 py-1 text-[13px] md:min-w-0 md:rounded-none md:pl-6 md:pr-3 ${
                   active
-                    ? "border-[#0071e3] bg-vsc-select text-white md:border-y-[#0071e3] md:border-x-transparent"
+                    ? "border-yellow bg-vsc-select text-white md:border-y-transparent md:border-l-yellow md:border-r-transparent md:border-l-2"
                     : "border-transparent hover:bg-vsc-active"
                 }`}
               >

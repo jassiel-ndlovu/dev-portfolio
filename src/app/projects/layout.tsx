@@ -16,8 +16,8 @@ export default function ProjectsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex-1 bg-[#111111] text-vsc-text md:px-5 md:py-5">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col bg-vsc-bg md:overflow-hidden md:h-[calc(100dvh-5.5rem)] md:rounded-xl md:border md:border-vsc-border md:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
+    <div className="flex-1 bg-ink text-vsc-text md:px-5 md:py-5">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col bg-vsc-bg md:overflow-hidden md:h-[calc(100dvh-6rem)] md:rounded-xl md:border md:border-vsc-border md:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
         <TitleBar />
 
         <div className="flex min-h-0 flex-1 flex-col md:flex-row">

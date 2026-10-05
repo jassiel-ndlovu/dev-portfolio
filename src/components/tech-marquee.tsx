@@ -3,8 +3,8 @@ import { LucideIcon } from "./lucide-icon";
 
 function Chip({ t }: { t: Tech }) {
   return (
-    <div className="flex shrink-0 items-center gap-2.5 rounded-full bg-alt py-2 pl-2 pr-5">
-      <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-accent">
+    <div className="flex shrink-0 items-center gap-2.5 rounded-full bg-ink-2 py-1.5 pl-1.5 pr-4 text-white">
+      <span className="grid h-8 w-8 place-items-center rounded-full bg-yellow text-ink">
         {t.fa ? (
           <i className={`${t.fa} text-base`} aria-hidden="true" />
         ) : (

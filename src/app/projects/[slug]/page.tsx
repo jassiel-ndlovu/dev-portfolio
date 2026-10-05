@@ -140,7 +140,7 @@ export default async function ProjectPage({
                     href={project.demoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[3px] bg-[#0071e3] px-3.5 py-1.5 font-medium text-white transition-colors hover:bg-[#0062c4]"
+                    className="inline-flex items-center gap-2 rounded-[3px] bg-yellow px-3.5 py-1.5 font-semibold text-ink transition-colors hover:bg-yellow-deep"
                   >
                     <i className="fa-solid fa-arrow-up-right-from-square text-[11px]" aria-hidden="true" />
                     Live site
@@ -154,7 +154,7 @@ export default async function ProjectPage({
                     className={`inline-flex items-center gap-2 rounded-[3px] px-3.5 py-1.5 font-medium transition-colors ${
                       project.demoUrl
                         ? "bg-[#313131] text-vsc-text hover:bg-[#3c3c3c]"
-                        : "bg-[#0071e3] text-white hover:bg-[#0062c4]"
+                        : "bg-yellow font-semibold text-ink hover:bg-yellow-deep"
                     }`}
                   >
                     <i className="fa-brands fa-github" aria-hidden="true" /> View repo
@@ -181,7 +181,7 @@ export default async function ProjectPage({
             </div>
 
             {/* Illustration on a light panel so it reads on the dark editor */}
-            <div className="hidden aspect-square w-44 shrink-0 rounded-2xl bg-[#eef5ff] p-3 sm:block">
+            <div className="hidden aspect-square w-44 shrink-0 rounded-2xl bg-yellow p-3 sm:block">
               <Illustration name={project.illustration} alt="" className="h-full w-full" />
             </div>
           </div>
@@ -197,7 +197,7 @@ export default async function ProjectPage({
         {/* Outcome + highlights */}
         {(project.outcome || project.highlights?.length) && (
           <Reveal delay={0.05}>
-            <div className="mt-8 rounded-r-md border-l-2 border-[#0071e3] bg-[#0071e3]/[0.08] px-5 py-4">
+            <div className="mt-8 rounded-r-md border-l-2 border-yellow bg-yellow/[0.07] px-5 py-4">
               {project.outcome && (
                 <p className="text-[15px] leading-relaxed text-white">{project.outcome}</p>
               )}

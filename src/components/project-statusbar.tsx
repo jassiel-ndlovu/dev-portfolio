@@ -4,13 +4,13 @@ import { usePathname } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
 import { vscStatus } from "@/lib/vscode";
 
-/** VS Code status bar in the site blue. */
+/** VS Code status bar in the site yellow. */
 export function ProjectStatusBar() {
   const pathname = usePathname();
   const project = getProject(pathname.split("/")[2] ?? "");
 
   const remote = (
-    <span className="flex h-full items-center gap-1.5 bg-[#059669] px-3" title="Portfolio">
+    <span className="flex h-full items-center gap-1.5 bg-ink px-3 text-yellow" title="Portfolio">
       <i className="fa-solid fa-code text-[10px]" aria-hidden="true" />
       <span className="hidden sm:inline">portfolio</span>
     </span>
@@ -18,7 +18,7 @@ export function ProjectStatusBar() {
 
   if (!project) {
     return (
-      <div className="mono flex h-6 items-stretch justify-between whitespace-nowrap bg-[#0071e3] text-[11px] text-white">
+      <div className="mono flex h-6 items-stretch justify-between whitespace-nowrap bg-yellow text-[11px] text-ink">
         <div className="flex items-center gap-3">
           {remote}
           <span className="flex items-center gap-1.5">
@@ -37,7 +37,7 @@ export function ProjectStatusBar() {
   const paper = project.links?.find((l) => /pdf|paper|report/i.test(l.label));
 
   return (
-    <div className="mono flex h-6 items-stretch justify-between gap-3 overflow-x-auto whitespace-nowrap bg-[#0071e3] text-[11px] text-white">
+    <div className="mono flex h-6 items-stretch justify-between gap-3 overflow-x-auto whitespace-nowrap bg-yellow text-[11px] text-ink">
       {/* Left cluster */}
       <div className="flex items-center gap-3">
         {remote}
@@ -45,7 +45,7 @@ export function ProjectStatusBar() {
           <i className="fa-solid fa-code-branch" aria-hidden="true" /> main
         </span>
         <span className="flex items-center gap-1.5" title="Status">
-          <span className="h-1.5 w-1.5 rounded-full bg-white" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink" />
           {status.label}
         </span>
       </div>

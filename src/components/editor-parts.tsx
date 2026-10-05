@@ -13,10 +13,10 @@ export function EditorHeader({
   crumbs: { label: string; href?: string }[];
 }) {
   return (
-    <div className="sticky top-12 z-20 md:top-0">
+    <div className="sticky top-14 z-20 md:top-0">
       <div className="flex h-9 items-stretch border-b border-vsc-border bg-vsc-panel">
         <div className="mono relative flex items-center gap-2 border-r border-vsc-border bg-vsc-bg px-3 text-[12.5px] text-white">
-          <span className="absolute inset-x-0 top-0 h-px bg-[#0071e3]" />
+          <span className="absolute inset-x-0 top-0 h-0.5 bg-yellow" />
           <i
             className={`${icon} text-[11px]`}
             style={iconColor ? { color: iconColor } : undefined}

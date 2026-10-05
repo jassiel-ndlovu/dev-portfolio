@@ -33,9 +33,9 @@ export const vscStatus: Record<
   },
   "in-progress": {
     label: "In progress",
-    dot: "bg-[#4daafc]",
-    text: "text-[#4daafc]",
-    chip: "bg-[#0071e3]/20 text-[#4daafc]",
+    dot: "bg-yellow",
+    text: "text-yellow",
+    chip: "bg-yellow/15 text-yellow",
   },
   archived: {
     label: "Archived",

@@ -7,7 +7,7 @@
  * Extra links (papers, dashboards, notebooks, live sites) go in `links`.
  */
 
-export type Accent = "blue" | "sky" | "green" | "slate";
+export type Accent = "yellow" | "coral" | "pink" | "green";
 
 export interface ProjectImage {
   src: string;
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     ],
     language: "TypeScript",
     images: [],
-    accent: "blue",
+    accent: "yellow",
     illustration: "teacher-student.svg",
     featured: true,
     status: "in-progress",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     tech: ["Python", "NumPy", "Bayesian Inference", "Gibbs Sampling", "MovieLens"],
     language: "Python",
     images: [],
-    accent: "sky",
+    accent: "coral",
     illustration: "aritificial-intelligence.svg",
     featured: true,
     status: "completed",
@@ -210,7 +210,7 @@ export const projects: Project[] = [
     tech: ["Python", "PyTorch", "CNNs", "pytest", "GitHub Actions"],
     language: "Python",
     images: [],
-    accent: "blue",
+    accent: "yellow",
     illustration: "brain-sides.svg",
     status: "completed",
     timeline: "2025",
@@ -248,7 +248,7 @@ export const projects: Project[] = [
     tech: ["Angular 19", "TypeScript", "Algorithm X (DLX)", "Backtracking"],
     language: "TypeScript",
     images: [],
-    accent: "sky",
+    accent: "coral",
     illustration: "problem-solving.svg",
     status: "completed",
     timeline: "2025",
@@ -333,7 +333,7 @@ export const projects: Project[] = [
     ],
     language: "C#",
     images: [],
-    accent: "blue",
+    accent: "yellow",
     illustration: "robotics.svg",
     status: "in-progress",
     timeline: "2025 – present",
@@ -372,7 +372,7 @@ export const projects: Project[] = [
     tech: ["TypeScript", "Tailwind CSS", "GSAP", "Resend", "Vercel"],
     language: "TypeScript",
     images: [],
-    accent: "slate",
+    accent: "pink",
     illustration: "digital-artist.svg",
     status: "in-progress",
     timeline: "2025 – present",
@@ -400,16 +400,16 @@ export const projects: Project[] = [
     title: "This Portfolio & CV",
     tagline: "The project-based CV you're reading right now",
     summary:
-      "A project-based portfolio and CV built with Next.js and deployed to AWS Amplify, with an Apple-inspired design system, recolored Storyset illustrations and this VS Code-style projects workbench.",
+      "A project-based portfolio and CV built with Next.js and deployed to AWS Amplify, with a black, white and yellow design system, Open Peeps, Transhumans and recolored Storyset illustrations, and this VS Code-style projects workbench.",
     description:
-      "This very site: a project-based portfolio and CV built with the Next.js App Router and TypeScript, styled with a hand-built Tailwind design system in a blue and green palette, with recolored Storyset illustrations and GSAP ScrollTrigger animations. The projects section is a VS Code-inspired workbench: an explorer sidebar, an editor pane and a status bar carrying repo, tech and status.\n\nContent is fully data-driven from a handful of typed config files, so adding a project or a whole section is a one-object change. It deploys to AWS Amplify Hosting via a Git-connected pipeline.",
+      "This very site: a project-based portfolio and CV built with the Next.js App Router and TypeScript, styled with a hand-built Tailwind design system in a black, white and warm yellow palette, with Open Peeps, Transhumans and recolored Storyset illustrations, and GSAP ScrollTrigger animations. The projects section is a VS Code-inspired workbench: an explorer sidebar, an editor pane and a status bar carrying repo, tech and status.\n\nContent is fully data-driven from a handful of typed config files, so adding a project or a whole section is a one-object change. It deploys to AWS Amplify Hosting via a Git-connected pipeline.",
     year: "2026",
     role: "Design & development",
     github: "jassiel-ndlovu/dev-portfolio",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP", "AWS Amplify"],
     language: "TypeScript",
     images: [],
-    accent: "sky",
+    accent: "coral",
     illustration: "developer.svg",
     status: "in-progress",
     timeline: "2026",
@@ -489,50 +489,27 @@ export const statusMeta: Record<
   completed: {
     label: "Completed",
     dot: "bg-green",
-    className: "text-green bg-green/10",
+    className: "text-green bg-green-soft",
   },
   "in-progress": {
     label: "In progress",
-    dot: "bg-accent",
-    className: "text-accent bg-accent/10",
+    dot: "bg-yellow-deep",
+    className: "text-ink bg-yellow-soft",
   },
   archived: {
     label: "Archived",
     dot: "bg-subtle",
-    className: "text-subtle bg-foreground/5",
+    className: "text-subtle bg-alt",
   },
 };
 
+/** Per-project accent: a bold chip colour and a soft wash. */
 export const accentClasses: Record<
   Accent,
-  { text: string; bg: string; bgSoft: string; border: string; ring: string }
+  { chip: string; soft: string; hex: string }
 > = {
-  blue: {
-    text: "text-accent",
-    bg: "bg-accent",
-    bgSoft: "bg-tint-blue",
-    border: "border-accent",
-    ring: "ring-accent",
-  },
-  sky: {
-    text: "text-sky",
-    bg: "bg-sky",
-    bgSoft: "bg-tint-sky",
-    border: "border-sky",
-    ring: "ring-sky",
-  },
-  green: {
-    text: "text-green",
-    bg: "bg-green",
-    bgSoft: "bg-tint-green",
-    border: "border-green",
-    ring: "ring-green",
-  },
-  slate: {
-    text: "text-muted",
-    bg: "bg-muted",
-    bgSoft: "bg-tint-slate",
-    border: "border-muted",
-    ring: "ring-muted",
-  },
+  yellow: { chip: "bg-yellow text-ink", soft: "bg-yellow-soft", hex: "#ffc845" },
+  coral: { chip: "bg-coral text-ink", soft: "bg-[#ffe1d8]", hex: "#ff7a59" },
+  pink: { chip: "bg-pink text-ink", soft: "bg-[#ffe6ec]", hex: "#ffb8c6" },
+  green: { chip: "bg-green text-white", soft: "bg-green-soft", hex: "#1e5b43" },
 };
