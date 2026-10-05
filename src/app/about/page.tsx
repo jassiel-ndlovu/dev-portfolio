@@ -12,7 +12,7 @@ import { LucideIcon } from "@/components/lucide-icon";
 import { TechMarquee } from "@/components/tech-marquee";
 import { ValuesStrip } from "@/components/values-strip";
 import { SectionHeading } from "@/components/section-heading";
-import { Avatar } from "@/components/avatar";
+import { ProfilePhoto } from "@/components/profile-photo";
 import { Band } from "@/components/band";
 import { PageIntro } from "@/components/page-intro";
 import { Figure, Shape } from "@/components/figure";
@@ -35,11 +35,7 @@ export default function AboutPage() {
         fill="#ffc845"
         shape="#ffb8c6"
         lead={
-          <Avatar
-            src={site.photo}
-            alt={site.name}
-            className="mb-6 h-16 w-16 rounded-full border-2 border-ink object-cover"
-          />
+          <ProfilePhoto className="mb-6 h-16 w-16 rounded-full border-2 border-ink object-cover" />
         }
       >
         I&apos;m {site.name}, a Computer Science graduate who likes

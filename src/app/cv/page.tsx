@@ -55,6 +55,8 @@ export default function CVPage() {
           {cv.resumePdf && (
             <a
               href={cv.resumePdf}
+              target="_blank"
+              rel="noreferrer"
               className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-black"
             >
               Download PDF
