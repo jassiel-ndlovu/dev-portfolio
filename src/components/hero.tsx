@@ -10,23 +10,37 @@ import { Figure, Shape } from "./figure";
 
 gsap.registerPlugin(useGSAP);
 
-// The crowd along the bottom of the hero. Outer figures drop off on small
-// screens so mobile keeps a tidy group of four.
+// The crowd along the bottom of the hero. `from` sets the breakpoint where a
+// figure appears, so the group grows with the screen and bleeds off the
+// edges on wide displays. Mobile keeps a tidy group of five.
+const show = {
+  all: "",
+  md: "hidden md:block",
+  lg: "hidden lg:block",
+  xl: "hidden xl:block",
+} as const;
+
 const crowd: {
   name: FigureName;
   fill: string;
   h: string;
-  hide?: boolean;
+  from: keyof typeof show;
   flip?: boolean;
 }[] = [
-  { name: "peeps/sitting-14", fill: "#ffb8c6", h: "h-44 lg:h-56", hide: true },
-  { name: "peeps/standing-22", fill: "#ffffff", h: "h-64 lg:h-80", hide: true },
-  { name: "peeps/standing-25", fill: "#ff7a59", h: "h-52 sm:h-64 lg:h-80" },
-  { name: "peeps/standing-13", fill: "#ffffff", h: "h-56 sm:h-72 lg:h-[22rem]" },
-  { name: "peeps/standing-16", fill: "#a7d3f5", h: "h-52 sm:h-64 lg:h-80", flip: true },
-  { name: "peeps/standing-5", fill: "#ffffff", h: "h-52 sm:h-64 lg:h-80" },
-  { name: "peeps/standing-23", fill: "#cdbdf3", h: "h-64 lg:h-80", hide: true, flip: true },
-  { name: "peeps/sitting-17", fill: "#ffffff", h: "h-44 lg:h-56", hide: true, flip: true },
+  { name: "peeps/sitting-18", fill: "#ff7a59", h: "h-56", from: "xl" },
+  { name: "peeps/standing-1", fill: "#ffb8c6", h: "h-80", from: "xl" },
+  { name: "peeps/sitting-14", fill: "#ffb8c6", h: "h-44 lg:h-56", from: "md" },
+  { name: "peeps/standing-22", fill: "#ffffff", h: "h-64 lg:h-80", from: "md" },
+  { name: "peeps/standing-24", fill: "#a7d3f5", h: "h-[19rem]", from: "lg" },
+  { name: "peeps/standing-25", fill: "#ff7a59", h: "h-52 sm:h-64 lg:h-80", from: "all" },
+  { name: "peeps/standing-13", fill: "#ffffff", h: "h-56 sm:h-72 lg:h-[22rem]", from: "all" },
+  { name: "peeps/sitting-1", fill: "#cdbdf3", h: "h-36 sm:h-44 lg:h-52", from: "all" },
+  { name: "peeps/standing-16", fill: "#a7d3f5", h: "h-52 sm:h-64 lg:h-80", from: "all", flip: true },
+  { name: "peeps/standing-5", fill: "#ffffff", h: "h-52 sm:h-64 lg:h-80", from: "all" },
+  { name: "peeps/standing-7", fill: "#ff7a59", h: "h-[19rem]", from: "lg", flip: true },
+  { name: "peeps/standing-23", fill: "#cdbdf3", h: "h-64 lg:h-80", from: "md", flip: true },
+  { name: "peeps/sitting-17", fill: "#ffffff", h: "h-44 lg:h-56", from: "md", flip: true },
+  { name: "peeps/standing-4", fill: "#a7d3f5", h: "h-80", from: "xl" },
 ];
 
 export function Hero() {
@@ -71,6 +85,33 @@ export function Hero() {
         <Shape kind="sparkle" color="#ffc845" className="absolute right-[12%] top-24 h-5 w-5" />
         <Shape kind="squiggle" color="#ff7a59" className="absolute right-[6%] top-48 h-5 w-24" />
         <Shape kind="dots" color="#ffffff" className="absolute left-[5%] top-56 h-6 w-10 opacity-30" />
+        <Shape kind="sparkle" color="#a7d3f5" className="absolute right-[22%] top-12 h-3.5 w-3.5" />
+        <Shape kind="circle" color="#ff7a59" className="absolute left-[24%] top-28 h-2.5 w-2.5" />
+        <Shape kind="squiggle" color="#ffc845" className="absolute left-[18%] top-[22rem] h-4 w-16" />
+      </div>
+
+      {/* Figures framing the headline on wide screens */}
+      <div
+        data-hero="figure"
+        style={{ opacity: 0 }}
+        className="pointer-events-none absolute left-[5%] top-24 hidden xl:block"
+        aria-hidden="true"
+      >
+        <div className="relative flex h-64 w-56 items-end justify-center">
+          <Shape kind="blob" color="#ff7a59" className="absolute inset-x-0 bottom-0 h-48 w-56" />
+          <Figure name="peeps/standing-10" fill="#ffc845" className="relative h-64" />
+        </div>
+      </div>
+      <div
+        data-hero="figure"
+        style={{ opacity: 0 }}
+        className="pointer-events-none absolute right-[5%] top-32 hidden xl:block"
+        aria-hidden="true"
+      >
+        <div className="relative flex h-56 w-56 items-end justify-center">
+          <Shape kind="circle" color="#ffc845" className="absolute bottom-0 left-1/2 h-44 w-44 -translate-x-1/2" />
+          <Figure name="peeps/sitting-4" fill="#ffb8c6" flip className="relative h-52" />
+        </div>
       </div>
 
       <div className="mx-auto max-w-3xl px-5 pt-16 text-center sm:pt-20">
@@ -131,7 +172,7 @@ export function Hero() {
               key={c.name}
               data-hero="figure"
               style={{ opacity: 0 }}
-              className={`-mx-3 sm:-mx-4 ${c.hide ? "hidden md:block" : ""}`}
+              className={`-mx-3 sm:-mx-4 ${show[c.from]}`}
             >
               <Figure name={c.name} fill={c.fill} flip={c.flip} className={c.h} />
             </div>
