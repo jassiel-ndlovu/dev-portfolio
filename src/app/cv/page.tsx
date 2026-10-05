@@ -11,28 +11,31 @@ import {
   scholarships,
 } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
+import { Figure, Shape } from "@/components/figure";
 
 export const metadata: Metadata = {
-  title: `CV — ${site.name}`,
+  title: `CV | ${site.name}`,
   description: `Curriculum vitae of ${site.name}, ${site.role}.`,
 };
 
 export default function CVPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-5 py-20 sm:py-24">
+    <div className="mx-auto w-full max-w-3xl px-5 py-14 sm:py-16">
       <Reveal>
-        <header className="pb-10">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent-deep">
-            Curriculum Vitae
-          </p>
-          <h1 className="display text-5xl tracking-tight sm:text-6xl">
+        <header className="relative pb-10 sm:pr-40">
+          <div className="absolute right-0 top-0 hidden sm:block" aria-hidden="true">
+            <Shape kind="circle" color="#ffc845" className="absolute bottom-0 left-1/2 h-32 w-32 -translate-x-1/2" />
+            <Figure name="transhumans/perserverance-dedication-focus" fill="#ffffff" className="relative h-44" />
+          </div>
+          <p className="label mb-4">Curriculum vitae</p>
+          <h1 className="display text-5xl sm:text-6xl">
             {site.name}
           </h1>
-          <p className="mt-3 text-xl text-muted">{site.role}</p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/90">
+          <p className="mt-3 text-xl text-subtle">{site.role}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             {cv.summary}
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-subtle">
             <span>{site.location}</span>
             {socials
               .filter((s) => s.href)
@@ -40,7 +43,7 @@ export default function CVPage() {
                 <a
                   key={s.label}
                   href={s.href}
-                  className="flex items-center gap-1.5 transition-colors hover:text-foreground"
+                  className="flex items-center gap-1.5 transition-colors hover:text-ink"
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
                 >
@@ -52,9 +55,9 @@ export default function CVPage() {
           {cv.resumePdf && (
             <a
               href={cv.resumePdf}
-              className="mt-8 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-black"
             >
-              Download PDF ↓
+              Download PDF
             </a>
           )}
         </header>
@@ -86,7 +89,7 @@ export default function CVPage() {
         ))}
       </Section>
 
-      <Section title="Awards & Honours">
+      <Section title="Awards and honours">
         {awards.map((a, i) => (
           <Row
             key={i}
@@ -122,7 +125,7 @@ export default function CVPage() {
                   {items.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted"
+                      className="rounded-full border-2 border-ink bg-surface px-3 py-0.5 text-xs font-medium"
                     >
                       {s}
                     </span>
@@ -134,7 +137,7 @@ export default function CVPage() {
         </div>
       </Section>
 
-      <Section title="Olympiads & Competitions">
+      <Section title="Olympiads and competitions">
         {olympiads.map((o, i) => (
           <Row
             key={i}
@@ -171,11 +174,11 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-border py-12">
-      <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-accent-deep">
-        {title}
+    <section className="border-t-2 border-ink py-10">
+      <h2 className="display mb-6 text-2xl">
+        <span className="marker">{title}</span>
       </h2>
-      <div className="space-y-8">{children}</div>
+      <div className="space-y-6">{children}</div>
     </section>
   );
 }
@@ -196,14 +199,14 @@ function Row({
   return (
     <Reveal delay={delay}>
       <div className="grid gap-1 sm:grid-cols-[150px_1fr]">
-        <div className="pt-0.5 text-sm text-muted">{period}</div>
+        <div className="pt-0.5 text-sm text-subtle">{period}</div>
         <div>
-          <div className="font-display font-bold tracking-tight">
+          <div className="font-semibold tracking-tight">
             {title}
-            {org && <span className="font-normal text-muted"> · {org}</span>}
+            {org && <span className="font-normal text-subtle"> · {org}</span>}
           </div>
           {detail && (
-            <p className="mt-1.5 text-[15px] leading-relaxed text-foreground/85">
+            <p className="mt-1.5 text-[15px] leading-relaxed text-muted">
               {detail}
             </p>
           )}

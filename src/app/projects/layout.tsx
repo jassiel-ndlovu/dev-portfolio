@@ -1,30 +1,39 @@
 import { ProjectSidebar } from "@/components/project-sidebar";
 import { ProjectStatusBar } from "@/components/project-statusbar";
+import {
+  TitleBar,
+  ActivityBar,
+  EditorPane,
+} from "@/components/workbench-chrome";
 
+/**
+ * The projects section is the one dark page: a VS Code-style window with a
+ * title bar, activity bar, explorer, editor and status bar.
+ */
 export default function ProjectsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex-1 bg-vsc-bg text-vsc-text">
-      <div className="mx-auto w-full max-w-7xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8">
-        <div className="grid gap-6 md:grid-cols-[300px_1fr]">
-          {/* Left panel — original design, sticky on desktop */}
-          <aside className="min-w-0 md:sticky md:top-20 md:h-[calc(100vh-7rem)]">
+    <div className="flex-1 bg-ink text-vsc-text md:px-5 md:py-5">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col bg-vsc-bg md:overflow-hidden md:h-[calc(100dvh-6rem)] md:rounded-xl md:border md:border-vsc-border md:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
+        <TitleBar />
+
+        <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+          <ActivityBar />
+
+          <aside className="min-w-0 shrink-0 border-b border-vsc-border bg-vsc-panel md:w-[280px] md:border-b-0 md:border-r lg:w-[300px]">
             <ProjectSidebar />
           </aside>
 
-          {/* Right (main) editor pane */}
-          <div className="min-w-0 overflow-hidden rounded-xl border border-vsc-border bg-vsc-bg">
-            {children}
-          </div>
+          <EditorPane>{children}</EditorPane>
         </div>
-      </div>
 
-      {/* Bottom status bar — stays visible while browsing a project */}
-      <div className="sticky bottom-0 z-30">
-        <ProjectStatusBar />
+        {/* Status bar: pinned to the bottom of the window */}
+        <div className="sticky bottom-0 z-30 md:static">
+          <ProjectStatusBar />
+        </div>
       </div>
     </div>
   );

@@ -1,37 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { motion } from "framer-motion";
-
 /**
  * Renders a Storyset illustration from /public/illustrations/<name>.
- * Download "cuate" style SVGs from https://storyset.com/cuate, recolor to the
- * site palette if you like, drop them in public/illustrations, and reference
- * the filename via a project's `illustration` field.
- *
- * A friendly placeholder shows until the real asset exists.
+ * The SVGs are recoloured to the site palette (blue, green, neutral ink).
+ * A placeholder shows if the asset is missing.
  */
 export function Illustration({
   name,
   alt,
   className = "",
-  float = true,
 }: {
   name: string;
   alt: string;
   className?: string;
-  float?: boolean;
 }) {
   return (
-    <motion.div
-      className={className}
-      animate={float ? { y: [0, -10, 0] } : undefined}
-      transition={
-        float
-          ? { duration: 5, repeat: Infinity, ease: "easeInOut" as const }
-          : undefined
-      }
-    >
+    <div className={className}>
       <img
         src={`/illustrations/${name}`}
         alt={alt}
@@ -45,6 +30,6 @@ export function Illustration({
           }
         }}
       />
-    </motion.div>
+    </div>
   );
 }

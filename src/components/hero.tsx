@@ -1,157 +1,184 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { site } from "@/lib/site";
-import { Illustration } from "./illustration";
-import { Moon, Star } from "lucide-react";
+import type { FigureName } from "@/lib/figures";
+import { Figure, Shape } from "./figure";
 
-const item = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
-};
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
-};
+gsap.registerPlugin(useGSAP);
 
-// The parade of characters along the bottom — edges bleed off, Banjo-style.
-// Outer figures are hidden on small screens so mobile shows a clean trio.
-const lineup = [
-  { name: "creative-thinker.svg", box: "h-32 w-32 sm:h-44 sm:w-44", hide: true },
-  { name: "curious.svg", box: "h-28 w-28 sm:h-40 sm:w-40", hide: true },
-  { name: "developer.svg", box: "h-36 w-36 sm:h-56 sm:w-56", hide: false },
-  { name: "launching.svg", box: "h-44 w-44 sm:h-72 sm:w-72", hide: false },
-  { name: "problem-solving.svg", box: "h-36 w-36 sm:h-56 sm:w-56", hide: false },
-  { name: "robotics.svg", box: "h-28 w-28 sm:h-40 sm:w-40", hide: true },
-  { name: "mathematics-tutor.svg", box: "h-32 w-32 sm:h-44 sm:w-44", hide: true },
+// The crowd along the bottom of the hero. `from` sets the breakpoint where a
+// figure appears, so the group grows with the screen and bleeds off the
+// edges on wide displays. Mobile keeps a tidy group of five.
+const show = {
+  all: "",
+  md: "hidden md:block",
+  lg: "hidden lg:block",
+  xl: "hidden xl:block",
+} as const;
+
+const crowd: {
+  name: FigureName;
+  fill: string;
+  h: string;
+  from: keyof typeof show;
+  flip?: boolean;
+}[] = [
+  { name: "peeps/sitting-18", fill: "#ff7a59", h: "h-56", from: "xl" },
+  { name: "peeps/standing-1", fill: "#ffb8c6", h: "h-80", from: "xl" },
+  { name: "peeps/sitting-14", fill: "#ffb8c6", h: "h-44 lg:h-56", from: "md" },
+  { name: "peeps/standing-22", fill: "#ffffff", h: "h-64 lg:h-80", from: "md" },
+  { name: "peeps/standing-24", fill: "#a7d3f5", h: "h-[19rem]", from: "lg" },
+  { name: "peeps/standing-25", fill: "#ff7a59", h: "h-52 sm:h-64 lg:h-80", from: "all" },
+  { name: "peeps/standing-13", fill: "#ffffff", h: "h-56 sm:h-72 lg:h-[22rem]", from: "all" },
+  { name: "peeps/sitting-1", fill: "#cdbdf3", h: "h-36 sm:h-44 lg:h-52", from: "all" },
+  { name: "peeps/standing-16", fill: "#a7d3f5", h: "h-52 sm:h-64 lg:h-80", from: "all", flip: true },
+  { name: "peeps/standing-5", fill: "#ffffff", h: "h-52 sm:h-64 lg:h-80", from: "all" },
+  { name: "peeps/standing-7", fill: "#ff7a59", h: "h-[19rem]", from: "lg", flip: true },
+  { name: "peeps/standing-23", fill: "#cdbdf3", h: "h-64 lg:h-80", from: "md", flip: true },
+  { name: "peeps/sitting-17", fill: "#ffffff", h: "h-44 lg:h-56", from: "md", flip: true },
+  { name: "peeps/standing-4", fill: "#a7d3f5", h: "h-80", from: "xl" },
 ];
 
 export function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  // One-off load sequence: copy rises in, the block grows, the crowd follows.
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set("[data-hero]", { opacity: 1, y: 0, scaleY: 1 });
+        return;
+      }
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
+        .fromTo(
+          "[data-hero='copy']",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }
+        )
+        .fromTo(
+          "[data-hero='block']",
+          { opacity: 0, scaleY: 0.4, transformOrigin: "bottom" },
+          { opacity: 1, scaleY: 1, duration: 0.7 },
+          "-=0.4"
+        )
+        .fromTo(
+          "[data-hero='figure']",
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.06 },
+          "-=0.45"
+        );
+    },
+    { scope: root }
+  );
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-background to-tint-peach/50">
-      {/* soft sun + sky */}
-      {/* <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-accent/15 blur-2xl" />
-      <div className="pointer-events-none absolute right-[12%] top-24 h-24 w-24 rounded-full bg-pop/10 blur-xl" /> */}
+    <section ref={root} className="relative isolate overflow-hidden bg-ink text-white">
+      {/* scattered decor */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 hidden sm:block">
+        <Shape kind="sparkle" color="#ffc845" className="absolute left-[9%] top-16 h-7 w-7" />
+        <Shape kind="sparkle" color="#ffb8c6" className="absolute left-[16%] top-36 h-4 w-4" />
+        <Shape kind="sparkle" color="#ffc845" className="absolute right-[12%] top-24 h-5 w-5" />
+        <Shape kind="squiggle" color="#ff7a59" className="absolute right-[6%] top-48 h-5 w-24" />
+        <Shape kind="dots" color="#ffffff" className="absolute left-[5%] top-56 h-6 w-10 opacity-30" />
+        <Shape kind="sparkle" color="#a7d3f5" className="absolute right-[22%] top-12 h-3.5 w-3.5" />
+        <Shape kind="circle" color="#ff7a59" className="absolute left-[24%] top-28 h-2.5 w-2.5" />
+        <Shape kind="squiggle" color="#ffc845" className="absolute left-[18%] top-[22rem] h-4 w-16" />
+      </div>
 
-      {/* drifting clouds (decor — hidden on small screens) */}
-      <Cloud className="hidden left-[6%] top-24 w-28 text-tint-peach/90 sm:block" duration={26} />
-      <Cloud className="hidden right-[10%] top-40 w-20 text-tint-peach/80 sm:block" duration={32} delay={4} />
-      <Cloud className="hidden left-[22%] top-52 w-16 text-tint-peach/70 sm:block" duration={38} delay={8} />
+      {/* Figures framing the headline on wide screens */}
+      <div
+        data-hero="figure"
+        style={{ opacity: 0 }}
+        className="pointer-events-none absolute left-[5%] top-24 hidden xl:block"
+        aria-hidden="true"
+      >
+        <div className="relative flex h-64 w-56 items-end justify-center">
+          <Shape kind="blob" color="#ff7a59" className="absolute inset-x-0 bottom-0 h-48 w-56" />
+          <Figure name="peeps/standing-10" fill="#ffc845" className="relative h-64" />
+        </div>
+      </div>
+      <div
+        data-hero="figure"
+        style={{ opacity: 0 }}
+        className="pointer-events-none absolute right-[5%] top-32 hidden xl:block"
+        aria-hidden="true"
+      >
+        <div className="relative flex h-56 w-56 items-end justify-center">
+          <Shape kind="circle" color="#ffc845" className="absolute bottom-0 left-1/2 h-44 w-44 -translate-x-1/2" />
+          <Figure name="peeps/sitting-4" fill="#ffb8c6" flip className="relative h-52" />
+        </div>
+      </div>
 
-      {/* floating sparkles (decor — hidden on small screens) */}
-      <motion.span
-        className="absolute left-[14%] top-40 hidden text-2xl text-accent sm:block"
-        animate={{ y: [0, -10, 0], rotate: [0, 15, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
-      >
-        <Star className="h-5 w-5 fill-accent" />
-      </motion.span>
-      <motion.span
-        className="absolute right-[18%] top-28 hidden text-xl text-pop sm:block"
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      >
-        <Moon className="h-5 w-5 fill-pop" />
-      </motion.span>
-
-      {/* headline */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative mx-auto max-w-3xl px-5 pt-14 text-center sm:pt-24"
-      >
-        <motion.p
-          variants={item}
-          className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-muted shadow-sm"
+      <div className="mx-auto max-w-3xl px-5 pt-16 text-center sm:pt-20">
+        <p
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white/80"
         >
-          <span className="h-2 w-2 rounded-full bg-pop" />
+          <span className="h-2 w-2 rounded-full bg-yellow" />
           {site.role} · Open to work
-        </motion.p>
+        </p>
 
-        <motion.h1
-          variants={item}
-          className="display text-[13vw] leading-[0.92] sm:text-7xl md:text-8xl"
+        <h1
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="display text-[15vw] leading-[0.95] sm:text-7xl md:text-8xl"
         >
-          Portfolio
-          <br />
-          <span className="text-accent">Website</span>
-        </motion.h1>
+          {site.name.split(" ")[0]}{" "}
+          <span className="text-yellow">{site.name.split(" ").slice(1).join(" ")}</span>
+        </h1>
 
-        <motion.p
-          variants={item}
-          className="mx-auto mt-6 max-w-xl text-lg text-foreground/75"
+        <p
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mx-auto mt-6 max-w-lg text-lg text-white/75 sm:text-xl"
         >
-          I&apos;m {site.name} — a Computer Science graduate who builds compilers,
-          platforms, and apps from first principles. Welcome to my corner of the
-          sky.
-        </motion.p>
+          Computer Science graduate. I build compilers, platforms and apps from
+          the ground up.
+        </p>
 
-        <motion.div
-          variants={item}
-          className="mt-8 flex flex-wrap justify-center gap-3"
+        <div
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
         >
           <Link
             href="/projects"
-            className="rounded-full bg-foreground px-7 py-3.5 font-medium text-background shadow-sm transition-transform hover:-translate-y-0.5"
+            className="rounded-full bg-yellow px-6 py-3 font-semibold text-ink transition-colors hover:bg-yellow-deep"
           >
-            View my work →
+            View projects
           </Link>
-          <Link
-            href="/about"
-            className="rounded-full border border-border bg-white px-7 py-3.5 font-medium transition-colors hover:bg-foreground/5"
-          >
-            About me
+          <Link href="/about" className="link-arrow hover:text-ink">
+            About me <span aria-hidden="true">→</span>
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      {/* the parade */}
-      <div className="relative mt-8 sm:mt-6">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="flex items-end justify-center px-2"
-        >
-          {lineup.map((l) => (
-            <motion.div
-              key={l.name}
-              variants={item}
-              className={`${l.box} ${l.hide ? "hidden sm:block" : ""} -mx-2 shrink-0 sm:-mx-5`}
+      {/* The crowd, standing in front of a yellow block */}
+      <div className="relative mt-12 sm:mt-14">
+        <div
+          data-hero="block"
+          style={{ opacity: 0 }}
+          className="absolute inset-x-[6%] bottom-0 h-[55%] rounded-t-[2.5rem] bg-yellow sm:inset-x-[12%]"
+        />
+        <div className="relative flex items-end justify-center">
+          {crowd.map((c) => (
+            <div
+              key={c.name}
+              data-hero="figure"
+              style={{ opacity: 0 }}
+              className={`-mx-3 sm:-mx-4 ${show[c.from]}`}
             >
-              <Illustration name={l.name} alt="" className="h-full w-full" />
-            </motion.div>
+              <Figure name={c.name} fill={c.fill} flip={c.flip} className={c.h} />
+            </div>
           ))}
-        </motion.div>
-        {/* ground line to seat the characters */}
-        <div className="h-px w-full bg-border" />
+        </div>
       </div>
     </section>
-  );
-}
-
-function Cloud({
-  className = "",
-  duration = 30,
-  delay = 0,
-}: {
-  className?: string;
-  duration?: number;
-  delay?: number;
-}) {
-  return (
-    <motion.svg
-      viewBox="0 0 100 40"
-      className={`pointer-events-none absolute ${className}`}
-      initial={{ x: 0 }}
-      animate={{ x: [0, 30, 0] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-      aria-hidden="true"
-      fill="currentColor"
-    >
-      <path d="M20,32 a12,12 0 0 1 2,-23 a16,16 0 0 1 30,-2 a12,12 0 0 1 16,6 a10,10 0 0 1 4,19 z" />
-    </motion.svg>
   );
 }

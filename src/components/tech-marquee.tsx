@@ -3,12 +3,12 @@ import { LucideIcon } from "./lucide-icon";
 
 function Chip({ t }: { t: Tech }) {
   return (
-    <div className="flex shrink-0 items-center gap-2.5 rounded-full border border-border bg-surface px-4 py-2.5 shadow-sm">
-      <span className="grid h-8 w-8 place-items-center rounded-full bg-accent/10 text-accent-deep">
+    <div className="flex shrink-0 items-center gap-2.5 rounded-full bg-ink-2 py-1.5 pl-1.5 pr-4 text-white">
+      <span className="grid h-8 w-8 place-items-center rounded-full bg-yellow text-ink">
         {t.fa ? (
-          <i className={`${t.fa} text-lg`} aria-hidden="true" />
+          <i className={`${t.fa} text-base`} aria-hidden="true" />
         ) : (
-          <LucideIcon name={t.lucide ?? "Code"} size={18} />
+          <LucideIcon name={t.lucide ?? "Code"} size={16} />
         )}
       </span>
       <span className="whitespace-nowrap text-sm font-medium">{t.name}</span>

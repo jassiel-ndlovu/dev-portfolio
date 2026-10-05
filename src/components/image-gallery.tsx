@@ -9,7 +9,7 @@ export function ImageGallery({ images }: { images: ProjectImage[] }) {
 
   if (images.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center text-sm text-muted">
+      <div className="rounded-md border border-dashed border-vsc-border p-8 text-center text-sm text-vsc-sub">
         No screenshots yet. Add images to this project&apos;s{" "}
         <code>images</code> array (place files in <code>/public</code>).
       </div>
@@ -23,7 +23,7 @@ export function ImageGallery({ images }: { images: ProjectImage[] }) {
           <button
             key={img.src}
             onClick={() => setActive(img)}
-            className="group aspect-video overflow-hidden rounded-xl border border-border bg-surface"
+            className="group aspect-video overflow-hidden rounded-md border border-vsc-border bg-vsc-panel"
           >
             <img
               src={img.src}

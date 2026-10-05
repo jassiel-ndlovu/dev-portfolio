@@ -1,12 +1,13 @@
 # Nkosenhle Ndlovu — Developer Portfolio & CV
 
-A minimalist, project-based portfolio and CV, with a whimsical cartoon
-(Storyset "cuate") aesthetic. Built with Next.js, TypeScript, Tailwind CSS v4,
-and Framer Motion; deploys to AWS Amplify Hosting.
+A project-based portfolio and CV in black and white with bold warm accents
+(yellow, coral, pink, deep green), black-ink illustrations set on bright
+shapes, and a dark, VS Code-style projects workbench. Built with Next.js, TypeScript, Tailwind CSS
+v4 and GSAP (ScrollTrigger); deploys to AWS Amplify Hosting.
 
 ## Highlights
 
-- **Landing page** — animated hero with floating shapes and a Storyset illustration.
+- **Landing page** — hero with a load-in sequence over a flowing SVG background, plus a row of Storyset illustrations.
 - **Projects** — a left panel lists all projects, a bottom-left panel shows
   previous/next, and the main panel renders the current project: overview, a
   **live GitHub panel** (languages, commits, forks, stars, topics), a screenshot
@@ -30,6 +31,9 @@ npm run dev                         # http://localhost:3000
 | Name, tagline, links, CV content | `src/lib/site.ts` |
 | Projects (all content + GitHub repo) | `src/lib/projects.ts` |
 | Colors / fonts / design tokens | `src/app/globals.css` |
+| Coloured section bands | `src/components/band.tsx` |
+| Duotone figures + shapes | `src/components/figure.tsx` (sizes in `src/lib/figures.ts`) |
+| Workbench chrome (title bar, activity bar) | `src/components/workbench-chrome.tsx` |
 | Landing hero | `src/components/hero.tsx` |
 | Project page layout | `src/app/projects/[slug]/page.tsx` |
 | Left list + prev/next panel | `src/components/project-sidebar.tsx` |
@@ -48,7 +52,15 @@ and `clarity` — rendered as cards on the project page.
 Placeholder SVGs live in `public/illustrations/`. To use the real cartoons:
 
 1. Download "cuate" style SVGs from <https://storyset.com/cuate> (recolor to the
-   palette if you like — the site uses amber `#f5a524` with teal/coral/purple/blue accents).
+   palette: ink `#151515`, yellow `#FFC845`, coral `#FF7A59`, green `#1E5B43`).
+
+### Figures (Open Peeps and Transhumans)
+
+Black-and-white figures by Pablo Stanley (CC0) live in
+`public/illustrations/peeps` and `public/illustrations/transhumans`. Each has a
+`lines/` copy with the white fill removed; `<Figure name="..." fill="#ffc845" />`
+paints any colour behind the ink. To add one, copy the file in, create its
+`lines/` copy, and add its size to `src/lib/figures.ts`.
 2. Drop them in `public/illustrations/`.
 3. Reference the filename in a project's `illustration` field (or `hero.svg` for the landing page).
 
@@ -81,4 +93,4 @@ disabled Azure workflow are leftovers and can be deleted.
 
 ## Tech stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · AWS Amplify.
+Next.js (App Router) · TypeScript · Tailwind CSS v4 · GSAP · AWS Amplify.
