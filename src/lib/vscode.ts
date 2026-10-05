@@ -1,3 +1,5 @@
+import type { ProjectStatus } from "./projects";
+
 /** Maps a project's primary language to a fake filename + a file-icon color. */
 export function fileMeta(language: string): { ext: string; color: string } {
   switch (language) {
@@ -16,4 +18,38 @@ export function fileMeta(language: string): { ext: string; color: string } {
 
 export function fileName(slug: string, language: string): string {
   return `${slug}.${fileMeta(language).ext}`;
+}
+
+/** Status colours tuned for the dark workbench. */
+export const vscStatus: Record<
+  ProjectStatus,
+  { label: string; dot: string; text: string; chip: string }
+> = {
+  completed: {
+    label: "Completed",
+    dot: "bg-[#34d399]",
+    text: "text-[#34d399]",
+    chip: "bg-[#059669]/15 text-[#34d399]",
+  },
+  "in-progress": {
+    label: "In progress",
+    dot: "bg-[#4daafc]",
+    text: "text-[#4daafc]",
+    chip: "bg-[#0071e3]/20 text-[#4daafc]",
+  },
+  archived: {
+    label: "Archived",
+    dot: "bg-vsc-sub",
+    text: "text-vsc-sub",
+    chip: "bg-white/5 text-vsc-sub",
+  },
+};
+
+/** Focus the explorer search box (used by the title bar and activity bar). */
+export function focusProjectSearch() {
+  const el = document.getElementById("project-search") as HTMLInputElement | null;
+  if (!el) return;
+  el.scrollIntoView({ block: "nearest" });
+  el.focus();
+  el.select();
 }

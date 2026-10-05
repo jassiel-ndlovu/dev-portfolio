@@ -1,18 +1,16 @@
 import { Reveal } from "./reveal";
 
 /**
- * Apple-style section header: small accent eyebrow, large tight headline,
- * roomy muted subtitle. Centered by default.
+ * Section header: a direct serif title with a short, plain subtitle.
+ * Centered by default.
  */
 export function SectionHeading({
-  eyebrow,
   title,
   subtitle,
   align = "center",
   as = "h2",
   className = "",
 }: {
-  eyebrow?: string;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
   align?: "center" | "left";
@@ -26,16 +24,11 @@ export function SectionHeading({
         align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"
       } ${className}`}
     >
-      {eyebrow && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent-deep">
-          {eyebrow}
-        </p>
-      )}
       <Tag
-        className={`display tracking-tight ${
+        className={`display ${
           as === "h1"
             ? "text-5xl sm:text-6xl md:text-7xl"
-            : "text-4xl sm:text-5xl"
+            : "text-4xl sm:text-5xl md:text-[3.5rem]"
         }`}
       >
         {title}

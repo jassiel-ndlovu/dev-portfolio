@@ -2,14 +2,14 @@
  * Site + content configuration
  * ----------------------------
  * Single source of truth for identity, CV, and all the About/Experience/
- * Certifications page content. Edit freely — most fields have sensible
+ * Certifications page content. Edit freely; most fields have sensible
  * placeholders where I didn't have your exact details (marked "// edit").
  */
 
 export const site = {
   name: "Nkosenhle Ndlovu",
   role: "Software Engineer",
-  tagline: "I build things from scratch — compilers, platforms, and apps.",
+  tagline: "I build compilers, platforms and apps from scratch.",
   intro:
     "Computer Science graduate who likes going a layer deeper: writing the SQL engine instead of using one, wiring the event bus instead of gluing services. This is a tour of the projects that taught me how.",
   location: "South Africa",
@@ -78,7 +78,7 @@ export const education: Education[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Experience — tutoring                                              */
+/* Experience: tutoring                                              */
 /* ------------------------------------------------------------------ */
 
 export interface Experience {
@@ -96,7 +96,7 @@ export const experience: Experience[] = [
     logo: "/companies/axiom-tutoring-company.jpg",
     period: "Jan 2024 – July 2024",
     detail:
-      "Tutoring high-school and university students in Mathematics and IT — breaking down hard concepts, building problem-solving intuition, and tracking progress toward exams.",
+      "Tutoring high-school and university students in Mathematics and IT. I break down hard concepts, build problem-solving intuition and track progress toward exams.",
   },
   {
     role: "IT Tutor",
@@ -133,7 +133,7 @@ export const experience: Experience[] = [
 ];
 
 export const experienceSummary =
-  "Four years of tutoring Mathematics and IT — the practice of explaining complex ideas simply has shaped how I design and document software.";
+  "Four years of tutoring Mathematics and IT. Explaining hard ideas simply has shaped how I design and document software.";
 
 /* ------------------------------------------------------------------ */
 /* Olympiads & competitions                                          */
@@ -191,7 +191,7 @@ export const certifications: Certification[] = [
   },
   {
     name: "Professional Member (Student)",
-    issuer: "IITPSA — Institute of IT Professionals South Africa",
+    issuer: "IITPSA (Institute of IT Professionals South Africa)",
     image: "/certifications/IITPSA-Membership-Certificate.png",
     credentialUrl: "/certifications/IITPSA-Membership-Certificate.pdf",
     detail:
@@ -248,7 +248,7 @@ export interface SoftSkill {
 export const softSkills: SoftSkill[] = [
   { name: "Problem Solving", lucide: "Puzzle", blurb: "Breaking hard problems into tractable pieces." },
   { name: "Leadership", lucide: "Users", blurb: "Taking initiative and bringing people along." },
-  { name: "Communication", lucide: "MessagesSquare", blurb: "Explaining complex ideas simply — honed through tutoring." },
+  { name: "Communication", lucide: "MessagesSquare", blurb: "Explaining complex ideas simply, a habit from tutoring." },
   { name: "Curiosity", lucide: "Lightbulb", blurb: "Going a layer deeper to understand how things work." },
   { name: "Creativity", lucide: "Palette", blurb: "Finding elegant, unexpected solutions." },
   { name: "Adaptability", lucide: "Repeat", blurb: "Comfortable across systems, mobile, and data." },
@@ -263,7 +263,7 @@ export const achievements: string[] = [
   "University Entrance & Council Merit Scholarships (2022–2024).",
   "Reached Round 2 of the SATMO Olympiad in both 2023 and 2024.",
   "Progressed to the third round of the Wits Mathematics Competition (2023).",
-  "Alibaba Cloud Academy — Cloud Computing certification; IITPSA student member.",
+  "Alibaba Cloud Academy Cloud Computing certification and IITPSA student membership.",
 ];
 
 /* ------------------------------------------------------------------ */
@@ -276,21 +276,21 @@ export interface Award {
 }
 
 export const awards: Award[] = [
-  { title: "Academic Top 3 — Knockando Residence", detail: "Wits · 2022" },
+  { title: "Academic Top 3, Knockando Residence", detail: "Wits · 2022" },
   {
-    title: "Certificate of Merit — Data Structures & Algorithms I",
+    title: "Certificate of Merit: Data Structures & Algorithms I",
     detail: "Wits · 2022",
   },
   {
-    title: "Certificate of Merit — Information Systems IB",
+    title: "Certificate of Merit: Information Systems IB",
     detail: "Wits · 2022",
   },
   {
-    title: "Certificate of Merit — Database Fundamentals II",
+    title: "Certificate of Merit: Database Fundamentals II",
     detail: "Wits · 2023",
   },
   {
-    title: "Certificate of Merit — Multivariable Calculus",
+    title: "Certificate of Merit: Multivariable Calculus",
     detail: "Wits · 2023",
   },
 ];
@@ -301,7 +301,7 @@ export const scholarships: Award[] = [
   { title: "University Council Merit Scholarship", detail: "Wits · 2024" },
 ];
 
-// Recreational activities — each with its own illustration.
+// Recreational activities, each with its own illustration.
 export interface Recreation {
   name: string;
   illustration: string;
@@ -321,7 +321,7 @@ export const recreation: Recreation[] = [
   {
     name: "Sketching & Hyperrealism",
     illustration: "sketch-artist.svg",
-    blurb: "Pencil work — from quick sketches to hyperreal detail.",
+    blurb: "Pencil work, from quick sketches to hyperreal detail.",
   },
   {
     name: "Graphic Design",
@@ -341,10 +341,10 @@ export const recreation: Recreation[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Values — "how I work"                                             */
+/* Values: "how I work"                                              */
 /* ------------------------------------------------------------------ */
 
-export type Tint = "peach" | "gold" | "rose" | "mint" | "coral";
+export type Tint = "blue" | "sky" | "green" | "slate";
 
 export interface Value {
   title: string;
@@ -357,39 +357,38 @@ export const values: Value[] = [
   {
     title: "First principles",
     blurb:
-      "I'd rather understand the layer beneath than treat it as magic — it's how the SQL engine and compiler happened.",
+      "I'd rather understand the layer beneath than treat it as magic. That's how the SQL engine and compiler happened.",
     illustration: "problem-solving.svg",
-    tint: "mint",
+    tint: "green",
   },
   {
     title: "Built to be read",
     blurb:
-      "Clear structure and documentation, so the next person — often future me — can follow the reasoning.",
+      "Clear structure and documentation, so the next person (often future me) can follow the reasoning.",
     illustration: "agile-workflow.svg",
-    tint: "gold",
+    tint: "sky",
   },
   {
     title: "Teach as you build",
     blurb:
-      "Four years of tutoring taught me that if you can't explain it simply, you don't understand it yet.",
+      "Four years of tutoring taught me that if I can't explain it simply, I don't understand it yet.",
     illustration: "teamwork.svg",
-    tint: "peach",
+    tint: "blue",
   },
   {
     title: "Lead with initiative",
     blurb:
       "Spotting what needs doing and taking ownership of it end to end.",
     illustration: "leadership-minded.svg",
-    tint: "rose",
+    tint: "slate",
   },
 ];
 
 export const tintClasses: Record<Tint, string> = {
-  peach: "bg-tint-peach",
-  gold: "bg-tint-gold",
-  rose: "bg-tint-rose",
-  mint: "bg-tint-mint",
-  coral: "bg-tint-coral",
+  blue: "bg-tint-blue",
+  sky: "bg-tint-sky",
+  green: "bg-tint-green",
+  slate: "bg-tint-slate",
 };
 
 /* ------------------------------------------------------------------ */

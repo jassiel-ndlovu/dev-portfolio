@@ -1,88 +1,71 @@
 @import "tailwindcss";
 
 /*
-  Design language — "Sunset"
-  --------------------------
-  Warm cream base with a sunset-orange accent ramp and a deep espresso ink.
-  Palette: #f26b3a #d94f2a #a43a2a #f3e2cf #2f2a26
+  Design language
+  ---------------
+  Apple-inspired: white space, hairline borders, one confident blue.
+  Palette: #FFFFFF  #0071E3  #0284C7  #059669  #111827
+  Body: Inter. Headings: Playfair Display. Code: JetBrains Mono.
 */
 
 :root {
-  /* Apple-inspired neutrals: cool near-whites, near-black ink, soft grey lines */
-  --background: #fbfbfd; /* Apple off-white */
+  --background: #ffffff;
   --surface: #ffffff;
-  --surface-2: #ffffff;
-  --foreground: #1d1d1f; /* Apple ink */
-  --muted: #6e6e73; /* Apple secondary grey */
-  --border: #d2d2d7; /* Apple hairline */
-  --alt: #f5f5f7; /* Apple alt-section grey */
+  --alt: #f5f5f7; /* soft grey band */
+  --foreground: #111827;
+  --muted: #4b5563;
+  --subtle: #6b7280;
+  --border: #e5e7eb;
 
-  --accent: #f26b3a; /* sunset orange */
-  --accent-deep: #d94f2a; /* deep orange */
-  --accent-dark: #a43a2a; /* brick */
-  --peach: #f6cbb0;
+  --accent: #0071e3; /* primary blue */
+  --accent-hover: #0062c4;
+  --sky: #0284c7; /* smoother blue */
+  --green: #059669;
 
-  /* complementary "pop" — teal against the orange for attention */
-  --pop: #12938a;
-  --pop-soft: #d8efeb;
+  /* pale washes used behind illustrations and in flowing backgrounds */
+  --tint-blue: #eef5ff;
+  --tint-sky: #e0f2fe;
+  --tint-green: #e7f7f1;
+  --tint-slate: #f1f5f9;
 
-  /* soft, vivid-yet-gentle section panel tints */
-  --tint-peach: #fce3d2;
-  --tint-gold: #f9eccf;
-  --tint-rose: #f9ddd8;
-  --tint-coral: #fbd8cd;
-  --tint-mint: #ddefe9;
-
-  --dark: #2f2a26; /* dark section bg */
-  --dark-surface: #3a332d;
-  --dark-border: #4a4139;
-  --on-dark: #f3e2cf;
-  --on-dark-muted: #c9b7a1;
-
-  /* VS Code (Dark+) palette — scoped to the projects workbench */
-  --vsc-bg: #1e1e1e;
-  --vsc-panel: #252526;
-  --vsc-activity: #333333;
-  --vsc-titlebar: #323233;
-  --vsc-border: #3c3c3c;
-  --vsc-active: #37373d;
-  --vsc-text: #d4d4d4;
-  --vsc-sub: #858585;
+  /* VS Code (Dark Modern) palette, scoped to the projects workbench */
+  --vsc-bg: #1f1f1f;
+  --vsc-panel: #181818;
+  --vsc-activity: #181818;
+  --vsc-titlebar: #181818;
+  --vsc-border: #2b2b2b;
+  --vsc-active: #2a2d2e;
+  --vsc-select: #04395e;
+  --vsc-text: #cccccc;
+  --vsc-sub: #9d9d9d;
+  --vsc-dim: #6e7681;
   --vsc-keyword: #569cd6;
   --vsc-string: #ce9178;
   --vsc-comment: #6a9955;
   --vsc-func: #dcdcaa;
   --vsc-type: #4ec9b0;
+  --vsc-var: #9cdcfe;
+  --vsc-num: #b5cea8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-alt: var(--alt);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
   --color-border: var(--border);
-  --color-alt: var(--alt);
 
   --color-accent: var(--accent);
-  --color-accent-deep: var(--accent-deep);
-  --color-accent-dark: var(--accent-dark);
-  --color-peach: var(--peach);
+  --color-accent-hover: var(--accent-hover);
+  --color-sky: var(--sky);
+  --color-green: var(--green);
 
-  --color-pop: var(--pop);
-  --color-pop-soft: var(--pop-soft);
-
-  --color-tint-peach: var(--tint-peach);
-  --color-tint-gold: var(--tint-gold);
-  --color-tint-rose: var(--tint-rose);
-  --color-tint-coral: var(--tint-coral);
-  --color-tint-mint: var(--tint-mint);
-
-  --color-dark: var(--dark);
-  --color-dark-surface: var(--dark-surface);
-  --color-dark-border: var(--dark-border);
-  --color-on-dark: var(--on-dark);
-  --color-on-dark-muted: var(--on-dark-muted);
+  --color-tint-blue: var(--tint-blue);
+  --color-tint-sky: var(--tint-sky);
+  --color-tint-green: var(--tint-green);
+  --color-tint-slate: var(--tint-slate);
 
   --color-vsc-bg: var(--vsc-bg);
   --color-vsc-panel: var(--vsc-panel);
@@ -90,16 +73,20 @@
   --color-vsc-titlebar: var(--vsc-titlebar);
   --color-vsc-border: var(--vsc-border);
   --color-vsc-active: var(--vsc-active);
+  --color-vsc-select: var(--vsc-select);
   --color-vsc-text: var(--vsc-text);
   --color-vsc-sub: var(--vsc-sub);
+  --color-vsc-dim: var(--vsc-dim);
   --color-vsc-keyword: var(--vsc-keyword);
   --color-vsc-string: var(--vsc-string);
   --color-vsc-comment: var(--vsc-comment);
   --color-vsc-func: var(--vsc-func);
   --color-vsc-type: var(--vsc-type);
+  --color-vsc-var: var(--vsc-var);
+  --color-vsc-num: var(--vsc-num);
 
-  --font-sans: var(--font-space-grotesk);
-  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -113,10 +100,8 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Apple-inspired: crisp system text for body copy, roomy line-height */
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
-    Helvetica, Arial, var(--font-sans), sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
   letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
@@ -124,28 +109,64 @@ body {
   overflow-x: clip;
 }
 
-/* Chunky display headings — kept for brand character, Apple-tight tracking */
+::selection {
+  background: rgba(0, 113, 227, 0.18);
+}
+
+/* Serif display headings */
 .display {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.95;
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Small caps label above or beside content */
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--subtle);
 }
 
 /* Monospace surfaces (VS Code workbench) */
 .mono {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 }
 
-/* Subtle dotted grid overlay */
-.dot-grid {
-  background-image: radial-gradient(rgba(243, 226, 207, 0.14) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
+/* Apple-style text link with arrow */
+.link-arrow {
+  color: var(--accent);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.link-arrow:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Thin custom scrollbar for the project list panel */
+/* Soft card lift */
+.card-lift {
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -24px rgba(17, 24, 39, 0.18);
+}
+
+/* Thin scrollbar */
+.thin-scroll {
+  scrollbar-width: thin;
+}
 .thin-scroll::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
   background: var(--border);
@@ -156,6 +177,10 @@ body {
 }
 
 /* VS Code–style scrollbar for the workbench */
+.vsc-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #424242 transparent;
+}
 .vsc-scroll::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -191,13 +216,13 @@ body {
 .marquee {
   display: flex;
   width: max-content;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 .marquee-left {
-  animation: marquee-left 40s linear infinite;
+  animation: marquee-left 50s linear infinite;
 }
 .marquee-right {
-  animation: marquee-right 40s linear infinite;
+  animation: marquee-right 50s linear infinite;
 }
 .marquee-mask {
   -webkit-mask-image: linear-gradient(

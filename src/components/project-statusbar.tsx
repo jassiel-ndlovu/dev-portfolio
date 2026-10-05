@@ -1,38 +1,63 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { getProject, statusMeta } from "@/lib/projects";
+import { getProject, projects } from "@/lib/projects";
+import { vscStatus } from "@/lib/vscode";
 
+/** VS Code status bar in the site blue. */
 export function ProjectStatusBar() {
   const pathname = usePathname();
-  const slug = pathname.split("/")[2] ?? "";
-  const project = getProject(slug);
-  if (!project) return null;
+  const project = getProject(pathname.split("/")[2] ?? "");
 
-  const status = statusMeta[project.status ?? "completed"];
+  const remote = (
+    <span className="flex h-full items-center gap-1.5 bg-[#059669] px-3" title="Portfolio">
+      <i className="fa-solid fa-code text-[10px]" aria-hidden="true" />
+      <span className="hidden sm:inline">portfolio</span>
+    </span>
+  );
+
+  if (!project) {
+    return (
+      <div className="mono flex h-6 items-stretch justify-between whitespace-nowrap bg-[#0071e3] text-[11px] text-white">
+        <div className="flex items-center gap-3">
+          {remote}
+          <span className="flex items-center gap-1.5">
+            <i className="fa-solid fa-code-branch" aria-hidden="true" /> main
+          </span>
+        </div>
+        <div className="flex items-center gap-3 px-3">
+          <span>{projects.length} projects</span>
+          <span className="hidden sm:inline">UTF-8</span>
+        </div>
+      </div>
+    );
+  }
+
+  const status = vscStatus[project.status ?? "completed"];
   const paper = project.links?.find((l) => /pdf|paper|report/i.test(l.label));
 
   return (
-    <div className="mono flex items-center justify-between gap-3 overflow-x-auto whitespace-nowrap bg-accent px-3 py-1 text-[11px] text-dark">
+    <div className="mono flex h-6 items-stretch justify-between gap-3 overflow-x-auto whitespace-nowrap bg-[#0071e3] text-[11px] text-white">
       {/* Left cluster */}
       <div className="flex items-center gap-3">
-        <span className="flex items-center gap-1.5" title="Status">
-          <span className={`h-1.5 w-1.5 rounded-full ${status.dot}`} />
-          {status.label}
-        </span>
+        {remote}
         <span className="hidden items-center gap-1.5 sm:flex" title="Branch">
           <i className="fa-solid fa-code-branch" aria-hidden="true" /> main
         </span>
-        <span className="flex items-center gap-1.5" title="Primary language">
-          <i className="fa-solid fa-code" aria-hidden="true" /> {project.language}
+        <span className="flex items-center gap-1.5" title="Status">
+          <span className="h-1.5 w-1.5 rounded-full bg-white" />
+          {status.label}
         </span>
       </div>
 
-      {/* Right cluster — links & meta */}
-      <div className="flex items-center gap-3">
+      {/* Right cluster: links and meta */}
+      <div className="flex items-center gap-3 pr-3">
         <span className="hidden items-center gap-1.5 sm:flex" title="Tech stack">
           <i className="fa-solid fa-layer-group" aria-hidden="true" />
-          {project.tech.length} techs
+          {project.tech.length} tools
+        </span>
+        <span className="flex items-center gap-1.5" title="Primary language">
+          <i className="fa-solid fa-code" aria-hidden="true" /> {project.language}
         </span>
 
         {project.demoUrl && (

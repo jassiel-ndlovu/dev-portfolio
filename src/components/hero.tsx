@@ -1,22 +1,17 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { site } from "@/lib/site";
 import { Illustration } from "./illustration";
-import { Moon, Star } from "lucide-react";
+import { FlowArt } from "./flow-section";
 
-const item = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
-};
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
-};
+gsap.registerPlugin(useGSAP);
 
-// The parade of characters along the bottom — edges bleed off, Banjo-style.
-// Outer figures are hidden on small screens so mobile shows a clean trio.
+// Characters along the bottom of the hero. Outer figures are hidden on
+// small screens so mobile shows a clean trio.
 const lineup = [
   { name: "creative-thinker.svg", box: "h-32 w-32 sm:h-44 sm:w-44", hide: true },
   { name: "curious.svg", box: "h-28 w-28 sm:h-40 sm:w-40", hide: true },
@@ -28,130 +23,98 @@ const lineup = [
 ];
 
 export function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  // One-off load sequence: copy rises in, then the characters follow.
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set("[data-hero]", { opacity: 1, y: 0 });
+        return;
+      }
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
+        .fromTo(
+          "[data-hero='copy']",
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }
+        )
+        .fromTo(
+          "[data-hero='figure']",
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.9, stagger: 0.07 },
+          "-=0.5"
+        );
+    },
+    { scope: root }
+  );
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-background to-tint-peach/50">
-      {/* soft sun + sky */}
-      {/* <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-accent/15 blur-2xl" />
-      <div className="pointer-events-none absolute right-[12%] top-24 h-24 w-24 rounded-full bg-pop/10 blur-xl" /> */}
+    <section ref={root} className="relative isolate overflow-hidden">
+      <FlowArt tone="blue" className="-z-10" />
 
-      {/* drifting clouds (decor — hidden on small screens) */}
-      <Cloud className="hidden left-[6%] top-24 w-28 text-tint-peach/90 sm:block" duration={26} />
-      <Cloud className="hidden right-[10%] top-40 w-20 text-tint-peach/80 sm:block" duration={32} delay={4} />
-      <Cloud className="hidden left-[22%] top-52 w-16 text-tint-peach/70 sm:block" duration={38} delay={8} />
-
-      {/* floating sparkles (decor — hidden on small screens) */}
-      <motion.span
-        className="absolute left-[14%] top-40 hidden text-2xl text-accent sm:block"
-        animate={{ y: [0, -10, 0], rotate: [0, 15, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
-      >
-        <Star className="h-5 w-5 fill-accent" />
-      </motion.span>
-      <motion.span
-        className="absolute right-[18%] top-28 hidden text-xl text-pop sm:block"
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      >
-        <Moon className="h-5 w-5 fill-pop" />
-      </motion.span>
-
-      {/* headline */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative mx-auto max-w-3xl px-5 pt-14 text-center sm:pt-24"
-      >
-        <motion.p
-          variants={item}
-          className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-muted shadow-sm"
+      <div className="relative mx-auto max-w-3xl px-5 pt-20 text-center sm:pt-32">
+        <p
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-white/80 px-4 py-1.5 text-sm text-muted backdrop-blur"
         >
-          <span className="h-2 w-2 rounded-full bg-pop" />
+          <span className="h-2 w-2 rounded-full bg-green" />
           {site.role} · Open to work
-        </motion.p>
+        </p>
 
-        <motion.h1
-          variants={item}
-          className="display text-[13vw] leading-[0.92] sm:text-7xl md:text-8xl"
+        <h1
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="display text-[14vw] leading-[0.95] sm:text-7xl md:text-8xl"
         >
-          Portfolio
+          {site.name.split(" ")[0]}
           <br />
-          <span className="text-accent">Website</span>
-        </motion.h1>
+          <span className="text-accent">{site.name.split(" ").slice(1).join(" ")}</span>
+        </h1>
 
-        <motion.p
-          variants={item}
-          className="mx-auto mt-6 max-w-xl text-lg text-foreground/75"
+        <p
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mx-auto mt-7 max-w-xl text-lg text-muted sm:text-xl"
         >
-          I&apos;m {site.name} — a Computer Science graduate who builds compilers,
-          platforms, and apps from first principles. Welcome to my corner of the
-          sky.
-        </motion.p>
+          Computer Science graduate. I build compilers, platforms and apps from
+          the ground up.
+        </p>
 
-        <motion.div
-          variants={item}
-          className="mt-8 flex flex-wrap justify-center gap-3"
+        <div
+          data-hero="copy"
+          style={{ opacity: 0 }}
+          className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
         >
           <Link
             href="/projects"
-            className="rounded-full bg-foreground px-7 py-3.5 font-medium text-background shadow-sm transition-transform hover:-translate-y-0.5"
+            className="rounded-full bg-accent px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent-hover"
           >
-            View my work →
+            View projects
           </Link>
-          <Link
-            href="/about"
-            className="rounded-full border border-border bg-white px-7 py-3.5 font-medium transition-colors hover:bg-foreground/5"
-          >
-            About me
+          <Link href="/about" className="link-arrow text-[15px]">
+            About me <span aria-hidden="true">›</span>
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      {/* the parade */}
-      <div className="relative mt-8 sm:mt-6">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="flex items-end justify-center px-2"
-        >
+      {/* Character lineup */}
+      <div className="relative mt-14 sm:mt-16">
+        <div className="flex items-end justify-center px-2">
           {lineup.map((l) => (
-            <motion.div
+            <div
               key={l.name}
-              variants={item}
+              data-hero="figure"
+              style={{ opacity: 0 }}
               className={`${l.box} ${l.hide ? "hidden sm:block" : ""} -mx-2 shrink-0 sm:-mx-5`}
             >
               <Illustration name={l.name} alt="" className="h-full w-full" />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-        {/* ground line to seat the characters */}
-        <div className="h-px w-full bg-border" />
+        </div>
+        <div className="h-px w-full bg-black/[0.08]" />
       </div>
     </section>
-  );
-}
-
-function Cloud({
-  className = "",
-  duration = 30,
-  delay = 0,
-}: {
-  className?: string;
-  duration?: number;
-  delay?: number;
-}) {
-  return (
-    <motion.svg
-      viewBox="0 0 100 40"
-      className={`pointer-events-none absolute ${className}`}
-      initial={{ x: 0 }}
-      animate={{ x: [0, 30, 0] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-      aria-hidden="true"
-      fill="currentColor"
-    >
-      <path d="M20,32 a12,12 0 0 1 2,-23 a16,16 0 0 1 30,-2 a12,12 0 0 1 16,6 a10,10 0 0 1 4,19 z" />
-    </motion.svg>
   );
 }
