@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
+import { ProfilePhoto } from "./profile-photo";
 
 const links = [
   { href: "/", label: "Home" },
@@ -28,14 +28,7 @@ export function SiteNav() {
       <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-4 px-5">
         {/* Wordmark */}
         <Link href="/" className="group flex min-w-0 items-center gap-2.5">
-          <img
-            src={site.photo}
-            alt=""
-            className="h-8 w-8 shrink-0 rounded-full bg-yellow object-cover ring-2 ring-yellow"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-            }}
-          />
+          <ProfilePhoto className="h-8 w-8 shrink-0 rounded-full bg-yellow object-cover ring-2 ring-yellow" />
           <span className="display truncate text-lg">{site.name}</span>
         </Link>
 

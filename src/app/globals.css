@@ -112,8 +112,16 @@ body {
   overflow-x: clip;
 }
 
+/* Highlighted text: always ink on yellow so it reads on light and dark
+   surfaces (code tokens included). On yellow surfaces, flip it. */
 ::selection {
   background: var(--yellow);
+  color: var(--ink);
+}
+.bg-yellow::selection,
+.bg-yellow ::selection {
+  background: var(--ink);
+  color: var(--yellow);
 }
 
 /* Serif display headings */
